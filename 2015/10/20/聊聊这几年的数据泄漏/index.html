@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+  
+    <html class="light page-post">
+  
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>聊聊这几年的数据泄漏 | Ray</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="安全,数据,互联网," />
+  
+
+  <meta name="description" content="近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。 下面就谈谈自己遇到的几次泄密事件。 CSDN数据泄漏2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。 2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是javaey">
+<meta name="keywords" content="安全,数据,互联网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊这几年的数据泄漏">
+<meta property="og:url" content="https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/index.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。 下面就谈谈自己遇到的几次泄密事件。 CSDN数据泄漏2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。 2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是javaey">
+<meta property="og:updated_time" content="2018-01-03T03:32:10.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊聊这几年的数据泄漏">
+<meta name="twitter:description" content="近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。 下面就谈谈自己遇到的几次泄密事件。 CSDN数据泄漏2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。 2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是javaey">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Menu</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSDN数据泄漏"><span class="toc-text">CSDN数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汉庭如家2000万账户泄漏"><span class="toc-text">汉庭如家2000万账户泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QQ数据泄漏"><span class="toc-text">QQ数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12306账户数据泄密"><span class="toc-text">12306账户数据泄密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易邮箱"><span class="toc-text">网易邮箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么规避账户泄漏"><span class="toc-text">怎么规避账户泄漏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我的银行密码设置方法"><span class="toc-text">我的银行密码设置方法</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-聊聊这几年的数据泄漏" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">聊聊这几年的数据泄漏</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2015.10.20</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ray</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://infullstack.github.io//2015/10/20/聊聊这几年的数据泄漏/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。</p>
+<p>下面就谈谈自己遇到的几次泄密事件。</p>
+<h2 id="CSDN数据泄漏"><a href="#CSDN数据泄漏" class="headerlink" title="CSDN数据泄漏"></a>CSDN数据泄漏</h2><p>2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。</p>
+<p>2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是<a href="http://iteye.com" target="_blank" rel="noopener">javaeye</a>和<a href="http://www.csdn.net" target="_blank" rel="noopener">CSDN</a>，所以我的账户也在泄漏数据之列。那个时候我的所有密码基本一致，虽然那个时候对我并没有造成过多的影响，但那时我就意识到帐号数据都处在很危险的地方。</p>
+<p>相关阅读：</p>
+<ul>
+<li><a href="http://www.chinaz.com/news/2011/1221/227512.shtml" target="_blank" rel="noopener">黑客公开CSDN网站数据库 600余万用户资料泄密</a></li>
+<li><a href="http://www.wooyun.org/bugs/wooyun-2011-03692" target="_blank" rel="noopener">CSDN数据库泄露，大量用户真实账号密码外泄</a></li>
+</ul>
+<h2 id="汉庭如家2000万账户泄漏"><a href="#汉庭如家2000万账户泄漏" class="headerlink" title="汉庭如家2000万账户泄漏"></a>汉庭如家2000万账户泄漏</h2><p>2013年10月，汉庭如家2000万账户泄密，庆幸的是，那个时候汉庭如家基本没住过，所以我的数据不在其中。</p>
+<p>有趣的是，由于我从事大数据工作，在一次与某电科院交流时，客户提议，导入2000万文本数据到hive中，进行检索，测试我们的产品性能，片刻时间导入之后，输入某领导手机后，刷刷刷，多条开房记录在秒内查询出来了，把我们都笑晕了。</p>
+<p>相关阅读：</p>
+<ul>
+<li><a href="http://www.wooyun.org/bugs/wooyun-2010-034935" target="_blank" rel="noopener">如家等大量酒店客户开房记录被第三方存储并因漏洞导致泄露</a></li>
+</ul>
+<h2 id="QQ数据泄漏"><a href="#QQ数据泄漏" class="headerlink" title="QQ数据泄漏"></a>QQ数据泄漏</h2><p>2013年，7000万个腾讯QQ群数据遭泄露，泄漏文件为SQL Server的数据库导出格式，“解压后达90多G，大概有7000多万个QQ群，12亿多个部分重复的QQ号码。</p>
+<p>当然我的qq信息，也在其中，至今，在社工库都能查到我的相关信息。-_-!!</p>
+<h2 id="12306账户数据泄密"><a href="#12306账户数据泄密" class="headerlink" title="12306账户数据泄密"></a>12306账户数据泄密</h2><p>在14年12月底，正是预定春运回家火车的时间，10几万条12306明文账户信息从网上公开，我立即下载下来，还好没有的帐号，随机选了几条数据登录12306，都能登录，当然我没有把别的票退掉。但这个的后果可想而知。</p>
+<p><a href="http://www.wooyun.org/bugs/wooyun-2014-088532" target="_blank" rel="noopener">乌云网漏洞</a></p>
+<h2 id="网易邮箱"><a href="#网易邮箱" class="headerlink" title="网易邮箱"></a>网易邮箱</h2><p>其实，昨日就有大量网易邮箱遭全面暴力破解的相关新闻放出，大量网友称绑定的账号遭泄露。绑定网易邮箱的Apple ID被锁成砖，iPhone存储数据被清空。其中，包括苹果Apple ID在内的微博、支付宝、百度云盘等都受到影响。</p>
+<p>还好，我的iphone先于帐号丢了。  -_- !!</p>
+<p>相关阅读<br><a href="http://business.sohu.com/20151020/n423654851.shtml" target="_blank" rel="noopener">网易邮箱现巨大漏洞 过亿数据遭泄漏</a></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>当然，这些只是近几年较为重大的事件，其他泄漏事件也不少。<a href="http://www.wooyun.org/" target="_blank" rel="noopener">http://www.wooyun.org/</a>上经常会有帐号安全漏洞。</p>
+<h2 id="怎么规避账户泄漏"><a href="#怎么规避账户泄漏" class="headerlink" title="怎么规避账户泄漏"></a>怎么规避账户泄漏</h2><p>用户无法避免账户泄漏，但需要确保不会引起连锁反应，所以我们最好控制每个账户的密码都不同，可以把密码设置为一段有含义的字母，好记又复杂。</p>
+<p>推荐阅读：</p>
+<ul>
+<li><a href="http://news.cnblogs.com/n/213772/" target="_blank" rel="noopener">一个密码改变了我的人生</a></li>
+</ul>
+<h3 id="我的银行密码设置方法"><a href="#我的银行密码设置方法" class="headerlink" title="我的银行密码设置方法"></a>我的银行密码设置方法</h3><p>卡号选几位  再利用各种运算符（加减乘除左移右移等）得出一个公式，算出一个密码。这样，只要有卡号，我就有密码了。(<em>^__^</em>) 嘻嘻</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Ray</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2015/10/16/说说我的利器/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2015/10/28/nba2016赛季前瞻/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'infullstack';
+    
+    var disqus_url = 'https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
