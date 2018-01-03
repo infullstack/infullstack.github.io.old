@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+  
+    <html class="light page-post">
+  
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Nginx+Tomcat实现应用负载均衡 | Ray</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="infullstack,设计,大数据,Java,Hadoop,kylin" />
+  
+
+  <meta name="description" content="概述当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。 部署架构图 特点：当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。该架构适用于无状态共享的应用服务，因为session并没有设置共享。 用到工具 nginx 1.10 tomcat 1.8  环境准">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx+Tomcat实现应用负载均衡">
+<meta property="og:url" content="https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/index.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="概述当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。 部署架构图 特点：当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。该架构适用于无状态共享的应用服务，因为session并没有设置共享。 用到工具 nginx 1.10 tomcat 1.8  环境准">
+<meta property="og:image" content="http://infullstack.com/wp-content/uploads/2016/12/nginx_tomcat.png">
+<meta property="og:image" content="http://infullstack.com/wp-content/uploads/2016/12/41.png">
+<meta property="og:image" content="http://infullstack.com/wp-content/uploads/2016/12/42.png">
+<meta property="og:updated_time" content="2018-01-03T03:13:18.815Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx+Tomcat实现应用负载均衡">
+<meta name="twitter:description" content="概述当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。 部署架构图 特点：当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。该架构适用于无状态共享的应用服务，因为session并没有设置共享。 用到工具 nginx 1.10 tomcat 1.8  环境准">
+<meta name="twitter:image" content="http://infullstack.com/wp-content/uploads/2016/12/nginx_tomcat.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Menu</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用到工具"><span class="toc-text">用到工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-text">环境准备</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置tomcat"><span class="toc-text">配置tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置端口-conf-server-xml"><span class="toc-text">配置端口(conf/server.xml)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增首页"><span class="toc-text">新增首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动tomcat"><span class="toc-text">启动tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置tomcat2"><span class="toc-text">配置tomcat2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Nginx"><span class="toc-text">部署Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-安装"><span class="toc-text">Nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置nginx"><span class="toc-text">配置nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动和访问Nginx"><span class="toc-text">启动和访问Nginx</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Nginx-Tomcat实现应用负载均衡" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Nginx+Tomcat实现应用负载均衡</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.12.30</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ray</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://infullstack.github.io//2016/12/30/Nginx-Tomcat实现应用负载均衡/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。</p>
+<p>部署架构图<br><img src="http://infullstack.com/wp-content/uploads/2016/12/nginx_tomcat.png" alt="" width="500" class="aligncenter size-full wp-image-100"></p>
+<p>特点：<br>当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。<br>该架构适用于无状态共享的应用服务，因为session并没有设置共享。</p>
+<h3 id="用到工具"><a href="#用到工具" class="headerlink" title="用到工具"></a>用到工具</h3><ul>
+<li>nginx 1.10</li>
+<li>tomcat 1.8</li>
+</ul>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p><em>三个节点</em></p>
+<ul>
+<li>172.16.2.41 Tomcat  tomcat_41</li>
+<li>172.16.2.42 Tomcat  tomcat_42</li>
+<li>172.16.2.43 Nginx   nginx_43</li>
+</ul>
+<h2 id="配置tomcat"><a href="#配置tomcat" class="headerlink" title="配置tomcat"></a>配置tomcat</h2><h3 id="配置端口-conf-server-xml"><a href="#配置端口-conf-server-xml" class="headerlink" title="配置端口(conf/server.xml)"></a>配置端口(conf/server.xml)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;1010&quot; protocol=&quot;HTTP/1.1&quot;</span><br><span class="line">               connectionTimeout=&quot;20000&quot;</span><br><span class="line">               redirectPort=&quot;8443&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="新增首页"><a href="#新增首页" class="headerlink" title="新增首页"></a>新增首页</h3><p>新增应用服务器首页，tomcat/webapps/ROOT/index.html</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@bigdata01 ROOT]<span class="comment"># echo 'tomcat at 41 !' &gt; index.html</span></span><br><span class="line">[root@bigdata01 ROOT]<span class="comment"># cat index.html </span></span><br><span class="line">tomcat at 41 !</span><br><span class="line">[root@bigdata01 ROOT]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a>启动tomcat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@transwarp1 bin]<span class="comment"># ./startup.sh </span></span><br><span class="line">Using CATALINA_BASE:   /mnt/disk1/ray/tomcat</span><br><span class="line">Using CATALINA_HOME:   /mnt/disk1/ray/tomcat</span><br><span class="line">Using CATALINA_TMPDIR: /mnt/disk1/ray/tomcat/temp</span><br><span class="line">Using JRE_HOME:        /usr/java/latest</span><br><span class="line">Using CLASSPATH:       /mnt/disk1/ray/tomcat/bin/bootstrap.jar:/mnt/disk1/ray/tomcat/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br><span class="line">[root@transwarp1 bin]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置tomcat2"><a href="#配置tomcat2" class="headerlink" title="配置tomcat2"></a>配置tomcat2</h3><p>方法同上。</p>
+<h2 id="部署Nginx"><a href="#部署Nginx" class="headerlink" title="部署Nginx"></a>部署Nginx</h2><h2 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h2><p>参考文章：<a href="http://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="noopener">Nginx 安装配置</a></p>
+<h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    upstream infullstack.com&#123;  #集群名称</span><br><span class="line">	    server	172.16.2.41:1010	weight=1;# 服务器列表，请求会转发到这些服务器</span><br><span class="line">	    server	172.16.2.42:1010	weight=2;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       88;  # nginx端口</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        location / &#123;</span><br><span class="line">            proxy_pass	http://infullstack.com; #集群名称</span><br><span class="line">            proxy_redirect	default;</span><br><span class="line">        &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="启动和访问Nginx"><a href="#启动和访问Nginx" class="headerlink" title="启动和访问Nginx"></a>启动和访问Nginx</h2><p>访问<a href="http://172.16.2.43:88/" target="_blank" rel="noopener">http://172.16.2.43:88/</a></p>
+<p>刷新页面，会发现请求会转发到41和42服务器</p>
+<p><img src="http://infullstack.com/wp-content/uploads/2016/12/41.png" alt="" width="505" height="142" class="alignnone size-full wp-image-101"><br><img src="http://infullstack.com/wp-content/uploads/2016/12/42.png" alt="" width="586" height="189" class="alignnone size-full wp-image-102"></p>
+<p>根据应用服务器的配置和需求，可以修改weight，配置服务器的权重。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Ray</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/12/09/实现shell并发/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/01/03/nginx负载均衡/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'infullstack';
+    
+    var disqus_url = 'https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

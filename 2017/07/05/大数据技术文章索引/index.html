@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+  
+    <html class="light page-post">
+  
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>大数据技术文章索引 | Ray</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="infullstack,设计,大数据,Java,Hadoop,kylin" />
+  
+
+  <meta name="description" content="存储格式 深入分析Parquet列式存储格式 大数据开源列式存储引擎Parquet和ORC Hive:ORC File Format存储格式详解  文件系统 HDFS 原理、架构与特性介绍 HDFS的运行原理 Namenode HA原理详解 Apache Kudu 加速对频繁更新数据的分析 基于内存的统一分布式存储系统 Alluxio 及其应用  计算引擎 MapReduce框架详解 MapRe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据技术文章索引">
+<meta property="og:url" content="https://infullstack.github.io/2017/07/05/大数据技术文章索引/index.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="存储格式 深入分析Parquet列式存储格式 大数据开源列式存储引擎Parquet和ORC Hive:ORC File Format存储格式详解  文件系统 HDFS 原理、架构与特性介绍 HDFS的运行原理 Namenode HA原理详解 Apache Kudu 加速对频繁更新数据的分析 基于内存的统一分布式存储系统 Alluxio 及其应用  计算引擎 MapReduce框架详解 MapRe">
+<meta property="og:image" content="http://okzvb3705.bkt.clouddn.com/filip-gielda-94858.jpg?imageView2/1/w/2400/h/800/">
+<meta property="og:updated_time" content="2018-01-03T03:10:06.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据技术文章索引">
+<meta name="twitter:description" content="存储格式 深入分析Parquet列式存储格式 大数据开源列式存储引擎Parquet和ORC Hive:ORC File Format存储格式详解  文件系统 HDFS 原理、架构与特性介绍 HDFS的运行原理 Namenode HA原理详解 Apache Kudu 加速对频繁更新数据的分析 基于内存的统一分布式存储系统 Alluxio 及其应用  计算引擎 MapReduce框架详解 MapRe">
+<meta name="twitter:image" content="http://okzvb3705.bkt.clouddn.com/filip-gielda-94858.jpg?imageView2/1/w/2400/h/800/">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Menu</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#存储格式"><span class="toc-text">存储格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统"><span class="toc-text">文件系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算引擎"><span class="toc-text">计算引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源管理"><span class="toc-text">资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务调度"><span class="toc-text">任务调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL"><span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL引擎"><span class="toc-text">SQL引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流处理"><span class="toc-text">流处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息队列"><span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据采集"><span class="toc-text">数据采集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-text">算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全文检索"><span class="toc-text">全文检索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#机器学习"><span class="toc-text">机器学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-大数据技术文章索引" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">大数据技术文章索引</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.07.05</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ray</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://infullstack.github.io//2017/07/05/大数据技术文章索引/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><img src="http://okzvb3705.bkt.clouddn.com/filip-gielda-94858.jpg?imageView2/1/w/2400/h/800/" alt=""></p>
+<h2 id="存储格式"><a href="#存储格式" class="headerlink" title="存储格式"></a>存储格式</h2><ul>
+<li><a href="http://www.infoq.com/cn/articles/in-depth-analysis-of-parquet-column-storage-format" target="_blank" rel="noopener">深入分析Parquet列式存储格式</a></li>
+<li><a href="http://dongxicheng.org/mapreduce-nextgen/columnar-storage-parquet-and-orc/" target="_blank" rel="noopener">大数据开源列式存储引擎Parquet和ORC</a></li>
+<li><a href="https://www.iteblog.com/archives/1014.html" target="_blank" rel="noopener">Hive:ORC File Format存储格式详解</a></li>
+</ul>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
+<li><a href="http://www.uml.org.cn/sjjm/201309044.asp" target="_blank" rel="noopener">HDFS 原理、架构与特性介绍</a></li>
+<li><a href="http://blog.csdn.net/weixuehao/article/details/16967485" target="_blank" rel="noopener">HDFS的运行原理</a></li>
+<li><a href="http://www.it165.net/admin/html/201407/3465.html" target="_blank" rel="noopener">Namenode HA原理详解</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25928166" target="_blank" rel="noopener">Apache Kudu 加速对频繁更新数据的分析</a></li>
+<li><a href="http://www.leiphone.com/news/201610/rRTDqNk6lQrInqje.html" target="_blank" rel="noopener">基于内存的统一分布式存储系统 Alluxio 及其应用</a></li>
+</ul>
+<h2 id="计算引擎"><a href="#计算引擎" class="headerlink" title="计算引擎"></a>计算引擎</h2><ul>
+<li><a href="http://blog.jobbole.com/84089/" target="_blank" rel="noopener">MapReduce框架详解</a></li>
+<li><a href="http://langyu.iteye.com/blog/992916" target="_blank" rel="noopener">MapReduce:详解Shuffle过程</a></li>
+<li><a href="http://blog.csdn.net/lovehuangjiaju/article/details/48634607" target="_blank" rel="noopener">Spark运行原理</a></li>
+<li><a href="http://tech.meituan.com/spark-tuning-basic.html" target="_blank" rel="noopener">Spark性能优化指南</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-apache-flink/" target="_blank" rel="noopener">新一代大数据处理引擎 Apache Flink</a></li>
+<li><a href="http://shiyanjun.cn/archives/1508.html" target="_blank" rel="noopener">Apache Flink：特性、概念、组件栈、架构及原理分析</a></li>
+</ul>
+<h2 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h2><h2 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h2><ul>
+<li><a href="http://shiyanjun.cn/archives/1002.html" target="_blank" rel="noopener">Hue安装配置实践</a></li>
+<li><a href="http://www.cnblogs.com/smartloli/p/5191155.html" target="_blank" rel="noopener">Azkaban 作业调度</a></li>
+</ul>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><ul>
+<li><a href="http://blog.csdn.net/dbanote/article/details/8897599" target="_blank" rel="noopener">[HBase] LSM树 VS B+树</a></li>
+<li><a href="https://yq.aliyun.com/articles/70467" target="_blank" rel="noopener">HBase在阿里的应用实践</a></li>
+</ul>
+<h2 id="SQL引擎"><a href="#SQL引擎" class="headerlink" title="SQL引擎"></a>SQL引擎</h2><ul>
+<li><a href="http://www.csdn.net/article/2013-12-04/2817707-Impala-Big-Data-Engine" target="_blank" rel="noopener">Impala：新一代开源大数据分析引擎</a></li>
+<li><a href="http://www.infoq.com/cn/articles/apache-kylin-algorithm/" target="_blank" rel="noopener">Apache Kylin的快速数据立方体算法——概述</a></li>
+<li><a href="http://tech.meituan.com/presto.html" target="_blank" rel="noopener">Presto实现原理和美团的使用实践</a></li>
+</ul>
+<h2 id="流处理"><a href="#流处理" class="headerlink" title="流处理"></a>流处理</h2><ul>
+<li><a href="http://shiyanjun.cn/archives/1472.html" target="_blank" rel="noopener">Apache Storm内部原理分析</a></li>
+</ul>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><ul>
+<li><a href="http://tech.meituan.com/mq-design.html" target="_blank" rel="noopener">消息队列设计精要</a></li>
+<li><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="noopener">Kafka深度解析</a></li>
+<li><p><a href="http://tech.meituan.com/kafka-fs-design-theory.html" target="_blank" rel="noopener">Kafka文件存储机制那些事</a></p>
+<h2 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h2></li>
+<li><p><a href="https://my.oschina.net/leejun2005/blog/288136" target="_blank" rel="noopener">Flume NG 简介及配置实战</a></p>
+</li>
+<li><a href="http://shiyanjun.cn/archives/1497.html" target="_blank" rel="noopener">Flume日志收集分层架构应用实践</a></li>
+<li><a href="http://student-lp.iteye.com/blog/2157983" target="_blank" rel="noopener">Sqoop详解</a></li>
+<li><a href="http://tech.meituan.com/mt-log-system-arch.html" target="_blank" rel="noopener">基于Flume的美团日志收集系统(一)架构和设计</a></li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ul>
+<li><a href="http://www.infoq.com/cn/articles/kylin-apache-in-meituan-olap-scenarios-practice" target="_blank" rel="noopener">Apache Kylin在美团数十亿数据OLAP场景下的实践</a></li>
+<li><a href="http://tech.meituan.com/spark-in-meituan.html" target="_blank" rel="noopener">Spark在美团的实践</a></li>
+<li><a href="http://mp.weixin.qq.com/s/OJdlpP62YWGmVnBWsfpVZw" target="_blank" rel="noopener">携程实时用户行为系统实践</a></li>
+</ul>
+<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><ul>
+<li><a href="http://www.shaheng.me/blog/2015/06/elasticsearch--.html" target="_blank" rel="noopener">Elasticsearch架构原理</a></li>
+<li><p><a href="http://solr-vs-elasticsearch.com/" target="_blank" rel="noopener">solr vs elasticsearch 功能比较</a></p>
+<h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2></li>
+<li><p><a href="https://www.ibm.com/developerworks/cn/java/j-mahout/" target="_blank" rel="noopener">Apache Mahout 简介</a></p>
+</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="http://mp.weixin.qq.com/s/mO9Ht3pBlvDUFd-cUmz99w" target="_blank" rel="noopener">谷歌新发布的分布式数据库服务，是要打破CAP定理了吗？</a></li>
+<li><a href="https://m.aliyun.com/yunqi/articles/67000?tk=7msDtByJNMqIx7H1CqaPNnPbyUQ36CfaBHCMB9l9R4w%3D" target="_blank" rel="noopener">分布式(hadoop)内核研发面试指南</a></li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Ray</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/05/22/shell逐行读取文本的几种方法/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/12/27/hello-world/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'infullstack';
+    
+    var disqus_url = 'https://infullstack.github.io/2017/07/05/大数据技术文章索引/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

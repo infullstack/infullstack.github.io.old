@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Ray</title>
+  <title>nginx负载均衡 | Ray</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -16,16 +16,16 @@
     <meta name="keywords" content="infullstack,设计,大数据,Java,Hadoop,kylin" />
   
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="nginx可以按照调度规则实现动态、静态页面的分离，也可以按照轮询、ip哈希、URL哈希、权重等多种方式对后端服务器做负载均衡，同时还支持后端服务器的健康检查。 nginx的upstream目前支持的5种方式的分配 1.轮询（默认） 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。 1234upstream backserver &amp;#123;     serve">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://infullstack.github.io/2017/12/27/hello-world/index.html">
+<meta property="og:title" content="nginx负载均衡">
+<meta property="og:url" content="https://infullstack.github.io/2017/01/03/nginx负载均衡/index.html">
 <meta property="og:site_name" content="Ray">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-12-27T08:23:37.893Z">
+<meta property="og:description" content="nginx可以按照调度规则实现动态、静态页面的分离，也可以按照轮询、ip哈希、URL哈希、权重等多种方式对后端服务器做负载均衡，同时还支持后端服务器的健康检查。 nginx的upstream目前支持的5种方式的分配 1.轮询（默认） 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。 1234upstream backserver &amp;#123;     serve">
+<meta property="og:updated_time" content="2018-01-03T03:12:41.696Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="nginx负载均衡">
+<meta name="twitter:description" content="nginx可以按照调度规则实现动态、静态页面的分离，也可以按照轮询、ip哈希、URL哈希、权重等多种方式对后端服务器做负载均衡，同时还支持后端服务器的健康检查。 nginx的upstream目前支持的5种方式的分配 1.轮询（默认） 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。 1234upstream backserver &amp;#123;     serve">
 
   
 
@@ -157,22 +157,17 @@
 </div>
 
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
-  </div>
-
 
 
 <div class="content content-post CENTER">
-   <article id="post-hello-world" class="article article-type-post" itemprop="blogPost">
+   <article id="post-nginx负载均衡" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">Hello World</h1>
+    <h1 class="post-title">nginx负载均衡</h1>
 
     <div class="article-meta">
       <span>
         <i class="icon-calendar"></i>
-        <span>2017.12.27</span>
+        <span>2017.01.03</span>
       </span>
 
       
@@ -188,7 +183,7 @@
       
         <span>
           <i class="icon-comment"></i>
-          <a href="https://infullstack.github.io//2017/12/27/hello-world/#disqus_thread"></a>
+          <a href="https://infullstack.github.io//2017/01/03/nginx负载均衡/#disqus_thread"></a>
         </span>
       
 
@@ -207,16 +202,25 @@
 
   <div class="article-content">
     
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+      <p>nginx可以按照调度规则实现动态、静态页面的分离，也可以按照轮询、ip哈希、URL哈希、权重等多种方式对后端服务器做负载均衡，同时还支持后端服务器的健康检查。</p>
+<p>nginx的upstream目前支持的5种方式的分配</p>
+<p><strong>1.轮询（默认）</strong></p>
+<p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    server 192.168.0.14; </span><br><span class="line">    server 192.168.0.15; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.指定权重</strong></p>
+<p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    server 192.168.0.14 weight=10; </span><br><span class="line">    server 192.168.0.15 weight=10; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3.IP绑定 ip_hash (session绑定)</strong></p>
+<p>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    ip_hash; </span><br><span class="line">    server 192.168.0.14:88; </span><br><span class="line">    server 192.168.0.15:80; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4.fair（第三方）</strong></p>
+<p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    server server1; </span><br><span class="line">    server server2; </span><br><span class="line">    fair; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>5.url_hash（第三方）</strong></p>
+<p>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    server squid1:3128; </span><br><span class="line">    server squid2:3128; </span><br><span class="line">    hash $request_uri; </span><br><span class="line">    hash_method crc32; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在需要使用负载均衡的server中增加<br>示例配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">proxy_pass http://backserver/; </span><br><span class="line">upstream backserver&#123; </span><br><span class="line">    ip_hash; </span><br><span class="line">    server 127.0.0.1:9090 down; (down 表示单前的server暂时不参与负载) </span><br><span class="line">    server 127.0.0.1:8080 weight=2; (weight 默认为1.weight越大，负载的权重就越大) </span><br><span class="line">    server 127.0.0.1:6060; </span><br><span class="line">    server 127.0.0.1:7070 backup; (其它所有的非backup机器down或者忙的时候，请求backup机器) </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">max_fails ：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream 模块定义的错误</span><br><span class="line">fail_timeout:max_fails次失败后，暂停的时间</span><br></pre></td></tr></table></figure>
     
   </div>
 </article>
@@ -246,10 +250,10 @@
 
    
   <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/07/05/大数据技术文章索引/">
+    <a class="show pull-left" href="/2016/12/30/Nginx-Tomcat实现应用负载均衡/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2018/01/01/2018/">
+    <a class="show pull-right" href="/2017/01/11/shell通用日志函数/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
@@ -374,7 +378,7 @@
   <script>
     var disqus_shortname = 'infullstack';
     
-    var disqus_url = 'https://infullstack.github.io/2017/12/27/hello-world/';
+    var disqus_url = 'https://infullstack.github.io/2017/01/03/nginx负载均衡/';
     
     (function(){
       var dsq = document.createElement('script');

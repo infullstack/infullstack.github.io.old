@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | Ray</title>
+  <title>shell通用日志函数 | Ray</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -16,16 +16,16 @@
     <meta name="keywords" content="infullstack,设计,大数据,Java,Hadoop,kylin" />
   
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="为了方便调试，写了一个通用的日志函数，实现功能：  设定日志级别，实现可以输出不同级别的日志信息  日志格式类似为：[日志级别] 时间 funcname:函数名 [lineno:行号] 日志信息  不同级别，设定不同颜色   代码: 123456789101112131415function log &amp;#123;    local text;local logtype    logfile=/va">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://infullstack.github.io/2017/12/27/hello-world/index.html">
+<meta property="og:title" content="shell通用日志函数">
+<meta property="og:url" content="https://infullstack.github.io/2017/01/11/shell通用日志函数/index.html">
 <meta property="og:site_name" content="Ray">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-12-27T08:23:37.893Z">
+<meta property="og:description" content="为了方便调试，写了一个通用的日志函数，实现功能：  设定日志级别，实现可以输出不同级别的日志信息  日志格式类似为：[日志级别] 时间 funcname:函数名 [lineno:行号] 日志信息  不同级别，设定不同颜色   代码: 123456789101112131415function log &amp;#123;    local text;local logtype    logfile=/va">
+<meta property="og:updated_time" content="2018-01-03T03:11:44.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="shell通用日志函数">
+<meta name="twitter:description" content="为了方便调试，写了一个通用的日志函数，实现功能：  设定日志级别，实现可以输出不同级别的日志信息  日志格式类似为：[日志级别] 时间 funcname:函数名 [lineno:行号] 日志信息  不同级别，设定不同颜色   代码: 123456789101112131415function log &amp;#123;    local text;local logtype    logfile=/va">
 
   
 
@@ -157,22 +157,17 @@
 </div>
 
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
-  </div>
-
 
 
 <div class="content content-post CENTER">
-   <article id="post-hello-world" class="article article-type-post" itemprop="blogPost">
+   <article id="post-shell通用日志函数" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">Hello World</h1>
+    <h1 class="post-title">shell通用日志函数</h1>
 
     <div class="article-meta">
       <span>
         <i class="icon-calendar"></i>
-        <span>2017.12.27</span>
+        <span>2017.01.11</span>
       </span>
 
       
@@ -188,7 +183,7 @@
       
         <span>
           <i class="icon-comment"></i>
-          <a href="https://infullstack.github.io//2017/12/27/hello-world/#disqus_thread"></a>
+          <a href="https://infullstack.github.io//2017/01/11/shell通用日志函数/#disqus_thread"></a>
         </span>
       
 
@@ -207,16 +202,18 @@
 
   <div class="article-content">
     
-      <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+      <p>为了方便调试，写了一个通用的日志函数，实现功能：</p>
+<ol>
+<li>设定日志级别，实现可以输出不同级别的日志信息 </li>
+<li>日志格式类似为：[日志级别] 时间 funcname:函数名 [lineno:行号] 日志信息 </li>
+<li>不同级别，设定不同颜色 </li>
+</ol>
+<p><strong>代码:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function log &#123;</span><br><span class="line">    local text;local logtype</span><br><span class="line">    logfile=/var/log/mylog/mylog.log</span><br><span class="line">    logtype=$1</span><br><span class="line">    text=$2</span><br><span class="line">	message=&quot;`date +&apos;%F %H:%M:%S&apos;` $1 line:$LINENO $2&quot;</span><br><span class="line">    case $logtype in </span><br><span class="line">        error)</span><br><span class="line">            echo -e &quot;\033[31m$&#123;message&#125;\033[0m&quot; | tee -a $logfile;;</span><br><span class="line">        info)</span><br><span class="line">            echo -e &quot;\033[32m$&#123;message&#125;\033[0m&quot; | tee -a $logfile;;</span><br><span class="line">        warn)</span><br><span class="line">            echo -e &quot;\033[33m$&#123;message&#125;\033[0m&quot; | tee -a $logfile;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>使用:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log info &quot;this&apos;s info log&quot;</span><br><span class="line">log error &quot;this&apos;s error log&quot;</span><br><span class="line">log warn &quot;this&apos;s warn log&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>注:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">local : 局部变量</span><br><span class="line">$LINENO：shell 脚本行数</span><br><span class="line">$1 $2 ：函数参数</span><br><span class="line">tee 输出到控制台和文件</span><br><span class="line">\033[31m \033[0m : echo 输出颜色</span><br></pre></td></tr></table></figure>
     
   </div>
 </article>
@@ -246,10 +243,10 @@
 
    
   <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/07/05/大数据技术文章索引/">
+    <a class="show pull-left" href="/2017/01/03/nginx负载均衡/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="show pull-right" href="/2018/01/01/2018/">
+    <a class="show pull-right" href="/2017/03/10/【笔记】阿里开发手册/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
@@ -374,7 +371,7 @@
   <script>
     var disqus_shortname = 'infullstack';
     
-    var disqus_url = 'https://infullstack.github.io/2017/12/27/hello-world/';
+    var disqus_url = 'https://infullstack.github.io/2017/01/11/shell通用日志函数/';
     
     (function(){
       var dsq = document.createElement('script');
