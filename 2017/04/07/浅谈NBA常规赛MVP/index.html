@@ -162,7 +162,7 @@
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Posts List</strong>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP候选浅析"><span class="toc-text">MVP候选浅析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#詹姆斯-哈登"><span class="toc-text">詹姆斯.哈登</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#韦斯特布鲁克"><span class="toc-text">韦斯特布鲁克</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杜兰特"><span class="toc-text">杜兰特</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#詹姆斯"><span class="toc-text">詹姆斯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#库里"><span class="toc-text">库里</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#莱昂纳德"><span class="toc-text">莱昂纳德</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伊赛亚-托马斯"><span class="toc-text">伊赛亚.托马斯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#约翰-沃尔"><span class="toc-text">约翰.沃尔</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
   </div>
 
@@ -194,11 +194,6 @@
 
 
 
-      
-        <span>
-          <i class="icon-comment"></i>
-          <a href="https://infullstack.github.io//2017/04/07/浅谈NBA常规赛MVP/#disqus_thread"></a>
-        </span>
       
 
       
@@ -253,37 +248,8 @@
 
 
    
-  <div class="text-center donation">
-    <div class="inner-donation">
-      <span class="btn-donation">支持一下</span>
-      <div class="donation-body">
-        <div class="tip text-center">扫一扫，支持Ray</div>
-        <ul class="theme.donation.items.length">
-        
-          <li class="item">
-            <img src="/images/avatar.jpg" alt="">
-          </li>
-        
-          <li class="item">
-            <img src="/images/avatar.jpg" alt="">
-          </li>
-        
-        </ul>
-      </div>
-    </div>
-  </div>
-
 
    
-  <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/04/06/有效的管理邮件/">
-        <i class="icon icon-angle-left"></i>
-    </a>
-    <a class="show pull-right" href="/2017/05/22/shell逐行读取文本的几种方法/">
-        <i class="icon icon-angle-right"></i>
-    </a>
-  </div>
-
 
 
 
@@ -301,7 +267,7 @@
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
+      <span id="close" class="btn-close">Close</span>
     </div>
     <hr>
     <div class="modal-body">
@@ -395,29 +361,6 @@
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'infullstack';
-    
-    var disqus_url = 'https://infullstack.github.io/2017/04/07/浅谈NBA常规赛MVP/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
-
-
 
     
 
@@ -429,7 +372,31 @@
     
 	
     
-	
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment" ></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
+            appKey: "fWpVsIuv12f5WUQtCVLfb9px",
+            avatar:'mm',
+            placeholder: "Just go go",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  	
   </div>
 
   

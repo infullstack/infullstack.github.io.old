@@ -162,7 +162,7 @@
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Posts List</strong>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编程规范"><span class="toc-text">编程规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命名"><span class="toc-text">命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常量定义"><span class="toc-text">常量定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式规约"><span class="toc-text">格式规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OOP规约"><span class="toc-text">OOP规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合处理"><span class="toc-text">集合处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#并发处理"><span class="toc-text">并发处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制语句"><span class="toc-text">控制语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注释"><span class="toc-text">注释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常日志"><span class="toc-text">异常日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常处理"><span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志"><span class="toc-text">日志</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL"><span class="toc-text">MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL规约"><span class="toc-text">SQL规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ORM规约"><span class="toc-text">ORM规约</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工程规约"><span class="toc-text">工程规约</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用分层"><span class="toc-text">应用分层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器规约"><span class="toc-text">服务器规约</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全规约"><span class="toc-text">安全规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分层领域模型规约"><span class="toc-text">分层领域模型规约</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专有名词"><span class="toc-text">专有名词</span></a></li></ol></li></ol>
   </div>
 
@@ -194,11 +194,6 @@
 
 
 
-      
-        <span>
-          <i class="icon-comment"></i>
-          <a href="https://infullstack.github.io//2017/03/10/【笔记】阿里开发手册/#disqus_thread"></a>
-        </span>
       
 
       
@@ -351,37 +346,8 @@
 
 
    
-  <div class="text-center donation">
-    <div class="inner-donation">
-      <span class="btn-donation">支持一下</span>
-      <div class="donation-body">
-        <div class="tip text-center">扫一扫，支持Ray</div>
-        <ul class="theme.donation.items.length">
-        
-          <li class="item">
-            <img src="/images/avatar.jpg" alt="">
-          </li>
-        
-          <li class="item">
-            <img src="/images/avatar.jpg" alt="">
-          </li>
-        
-        </ul>
-      </div>
-    </div>
-  </div>
-
 
    
-  <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/01/11/shell通用日志函数/">
-        <i class="icon icon-angle-left"></i>
-    </a>
-    <a class="show pull-right" href="/2017/04/06/有效的管理邮件/">
-        <i class="icon icon-angle-right"></i>
-    </a>
-  </div>
-
 
 
 
@@ -399,7 +365,7 @@
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
+      <span id="close" class="btn-close">Close</span>
     </div>
     <hr>
     <div class="modal-body">
@@ -493,29 +459,6 @@
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'infullstack';
-    
-    var disqus_url = 'https://infullstack.github.io/2017/03/10/【笔记】阿里开发手册/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
-
-
 
     
 
@@ -527,7 +470,31 @@
     
 	
     
-	
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment" ></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
+            appKey: "fWpVsIuv12f5WUQtCVLfb9px",
+            avatar:'mm',
+            placeholder: "Just go go",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  	
   </div>
 
   
