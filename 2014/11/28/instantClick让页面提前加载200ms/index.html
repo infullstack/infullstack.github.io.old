@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+  
+    <html class="light page-post">
+  
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>instantClick让页面提前加载200ms | Ray</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="javascript," />
+  
+
+  <meta name="description" content="## 前言 ##加速网站加载的方式有很多，在@Roc的推荐下，我找到了这个InstantClick.js，仔细查看了官网的英文文档，发现InstantClick.js有个很好的实现思路(how-it-works)。在访问者点击一个链接之前( 鼠标测试：test yourself here )： - 悬停 hover (hover-&amp;gt;click之间200ms左右) - 鼠标按下 Mousedo">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="instantClick让页面提前加载200ms">
+<meta property="og:url" content="https://infullstack.github.io/2014/11/28/instantClick让页面提前加载200ms/index.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="## 前言 ##加速网站加载的方式有很多，在@Roc的推荐下，我找到了这个InstantClick.js，仔细查看了官网的英文文档，发现InstantClick.js有个很好的实现思路(how-it-works)。在访问者点击一个链接之前( 鼠标测试：test yourself here )： - 悬停 hover (hover-&amp;gt;click之间200ms左右) - 鼠标按下 Mousedo">
+<meta property="og:updated_time" content="2018-01-03T04:38:55.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="instantClick让页面提前加载200ms">
+<meta name="twitter:description" content="## 前言 ##加速网站加载的方式有很多，在@Roc的推荐下，我找到了这个InstantClick.js，仔细查看了官网的英文文档，发现InstantClick.js有个很好的实现思路(how-it-works)。在访问者点击一个链接之前( 鼠标测试：test yourself here )： - 悬停 hover (hover-&amp;gt;click之间200ms左右) - 鼠标按下 Mousedo">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Menu</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看效果"><span class="toc-text">查看效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展"><span class="toc-text">扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-instantClick让页面提前加载200ms" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">instantClick让页面提前加载200ms</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2014.11.28</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ray</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://infullstack.github.io//2014/11/28/instantClick让页面提前加载200ms/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <!--markdown-->## 前言 ##<br><br>加速网站加载的方式有很多，在<a href="http://blog.huangweipeng.org/" target="_blank" rel="noopener">@Roc</a>的推荐下，我找到了这个<a href="http://instantclick.io/" target="_blank" rel="noopener">InstantClick.js</a>，仔细查看了官网的英文文档，发现InstantClick.js有个很好的实现思路(<a href="http://instantclick.io/how-it-works" target="_blank" rel="noopener">how-it-works</a>)。<br><br>在访问者点击一个链接之前( 鼠标测试：<a href="http://instantclick.io/click-test" target="_blank" rel="noopener">test yourself here</a> )：<br> - 悬停 hover (hover-&gt;click之间200ms左右)<br> - 鼠标按下 Mousedown (Mousedown-&gt;click之间100ms左右)，<br> - Touchstart 手机触碰<br><br>这两个事件之间通常有200ms的间隔，InstantClick 利用这个时间间隔预加载页面。这样当你点击页面的时候，其实页面已经加载到本地了，呈现当然也就会很快。<br><br>当然InstantClick 也使用了 Pjax： pushState 和 Ajax 技术<br><br>同时我试用了下，的确效果不错。如果你的博客需要实现Pjax，InstantClick会是个不错的选择。<br><br>## 使用方法 ##<br><br>### 下载instantclick.js ###<br><br>下载地址：<a href="http://instantclick.io/v3.0.1/instantclick.min.js" target="_blank" rel="noopener">instantclick.min.js</a>仅仅2.5Kb，很小<br><br>### 使用 ###<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;instantclick.min.js&quot; data-no-instant&gt;&lt;/script&gt;</span><br><span class="line">&lt;script data-no-instant&gt;InstantClick.init();&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：</p>
+<ul>
+<li>data-no-instant的含义是，这个JS只会运行一次，需要根据自己的情况，设置</li>
+<li>如果想避免不必要的预加载，关闭hover，启用Mousedown是个不错的选择，moursedown意味着已经点击链接</li>
+</ul>
+<h3 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h3><p>打开chrome console，查看network视图，会在每次hover时，都可以先加载页面，在click时展示结果页面。</p>
+<p>由于没有一个好的截动画软件，所以没有gif动画展示</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>InstantClick也提供了几个事件可以设置。</p>
+<ol>
+<li>change 页面更改完毕，即click触发加载后</li>
+<li>fetch  页面开始预加载</li>
+<li>receive 页面预加载完毕，即：hover或mousedown触发的预加载，但不一定会change，因为用户不一定click</li>
+</ol>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>因为使用ajax，所以google ga不会统计PV，所以增加change方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;instantclick.min.js&quot; data-no-instant&gt;&lt;/script&gt;</span><br><span class="line">&lt;script data-no-instant&gt;</span><br><span class="line">/* Google Analytics code here, without ga(&apos;send&apos;, &apos;pageview&apos;) */</span><br><span class="line"> </span><br><span class="line">InstantClick.on(&apos;change&apos;, function() &#123;</span><br><span class="line">  ga(&apos;send&apos;, &apos;pageview&apos;, location.pathname + location.search);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">InstantClick.init();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Ray</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2014/11/10/java多叉树的实现/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2014/12/01/Linux磁盘批量分区和挂载/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'infullstack';
+    
+    var disqus_url = 'https://infullstack.github.io/2014/11/28/instantClick让页面提前加载200ms/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

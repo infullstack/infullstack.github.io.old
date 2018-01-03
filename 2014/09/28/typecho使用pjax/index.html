@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+  
+    <html class="light page-post">
+  
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>typecho使用pjax | Ray</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="typecho,pjax,ajax," />
+  
+
+  <meta name="description" content="## 前言 ##传统ajax，只能异步获取到数据，但是不能动态的改变网页地址。pjax即ajax+history.pushStateHTML5里引用了新的API，history.pushState和history.replaceState，就是通过这个接口做到无刷新改变页面URL的。最典型的应用网站是github.com，本站也加入了pjax我使用的是welefen封装过的pjax的jQuery版">
+<meta name="keywords" content="typecho,pjax,ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typecho使用pjax">
+<meta property="og:url" content="https://infullstack.github.io/2014/09/28/typecho使用pjax/index.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="## 前言 ##传统ajax，只能异步获取到数据，但是不能动态的改变网页地址。pjax即ajax+history.pushStateHTML5里引用了新的API，history.pushState和history.replaceState，就是通过这个接口做到无刷新改变页面URL的。最典型的应用网站是github.com，本站也加入了pjax我使用的是welefen封装过的pjax的jQuery版">
+<meta property="og:updated_time" content="2018-01-03T03:46:54.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="typecho使用pjax">
+<meta name="twitter:description" content="## 前言 ##传统ajax，只能异步获取到数据，但是不能动态的改变网页地址。pjax即ajax+history.pushStateHTML5里引用了新的API，history.pushState和history.replaceState，就是通过这个接口做到无刷新改变页面URL的。最典型的应用网站是github.com，本站也加入了pjax我使用的是welefen封装过的pjax的jQuery版">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Menu</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-typecho使用pjax" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">typecho使用pjax</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2014.09.28</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ray</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://infullstack.github.io//2014/09/28/typecho使用pjax/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <!--markdown-->## 前言 ##<br>传统ajax，只能异步获取到数据，但是不能动态的改变网页地址。<br><br>pjax即ajax+history.pushState<br><br>HTML5里引用了新的API，history.pushState和history.replaceState，就是通过这个接口做到无刷新改变页面URL的。<br><br>最典型的应用网站是<a href="http://github.com" target="_blank" rel="noopener">github.com</a>，本站也加入了pjax<br><br>我使用的是welefen封装过的pjax的jQuery版本<br><br> - 同时支持了缓存和本地存储，下次访问的时候直接读取本地数据，无需在次访问。<br> - 并且展现方式支持动画技术，可以使用系统自带的动画方式，也可以自定义动画展现方式。<br><br><br>## 使用步骤 ##<br><br><strong>1. 下载jquery.pjax.js</strong><br><a href="https://github.com/welefen/pjax" target="_blank" rel="noopener">下载地址</a><br>引用下载到的jquery.pjax.js到header.php中<br><br><strong>2. 对a链接进行使用pjax绑定</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//本站实例</span><br><span class="line">jQuery(document).ready(function()&#123;</span><br><span class="line">	var $=jQuery; </span><br><span class="line">        //绑定链接</span><br><span class="line">	$.pjax(&#123;</span><br><span class="line">		selector: &quot;a[href^=&apos;http://iyanlei.com&apos;][href$=&apos;.html&apos;]&quot;,</span><br><span class="line">		container: &apos;.ajaxdiv&apos;, //内容替换的容器</span><br><span class="line">		show: &apos;slide&apos;,  //展现的动画，支持默认和fade, 可以自定义动画方式，这里为自定义的function即可。</span><br><span class="line">		cache: false,  //是否使用缓存</span><br><span class="line">		storage: true,  //是否使用本地存储</span><br><span class="line">		titleSuffix: &apos; | Ray&apos;, //标题后缀</span><br><span class="line">		filter: function()&#123;&#125;,</span><br><span class="line">		callback: function(status)&#123;</span><br><span class="line">			$(&quot;#nav-menu&quot;).addClass(&quot;animated fadeInUp&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;); </span><br><span class="line">        //绑定跳转开始事件</span><br><span class="line">	$(&quot;.ajaxdiv&quot;).bind(&quot;pjax.start&quot;,</span><br><span class="line">		 function() &#123; </span><br><span class="line">			$(&quot;.ajaxdiv&quot;).css(&quot;opacity&quot;,&quot;0.6&quot;);</span><br><span class="line">			$(&quot;.spinner&quot;).css(&quot;opacity&quot;,&quot;1&quot;);</span><br><span class="line">			$(&quot;.spinner&quot;).show();				</span><br><span class="line">			</span><br><span class="line">	 &#125;);</span><br><span class="line">        //绑定跳转结束事件</span><br><span class="line">	$(&quot;.ajaxdiv&quot;).bind(&quot;pjax.end&quot;,</span><br><span class="line">		 function() &#123;  </span><br><span class="line">			$(&quot;.spinner&quot;).hide();</span><br><span class="line">			$(&quot;.ajaxdiv&quot;).css(&quot;opacity&quot;,&quot;1&quot;);</span><br><span class="line">			// Main</span><br><span class="line">			initHeader();</span><br><span class="line">			addListeners();</span><br><span class="line">			if (navigator.userAgent.indexOf(&apos;Firefox&apos;) &gt;= 0)&#123;</span><br><span class="line">				document.documentElement.scrollTop=120;</span><br><span class="line">			&#125;</span><br><span class="line">			else</span><br><span class="line">			&#123;</span><br><span class="line">			   $(&apos;body&apos;).animate(&#123;scrollTop: 120&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">			 </span><br><span class="line">	 &#125;); </span><br><span class="line">	 </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>3. typecho后端修改</strong><br>因为pjax使用的还是AJAX,所以 异步请求的时候后端不能将公用的内容也返回。<br>即需要一个判断是否pjax请求的接口，判断如果是pjax请求时，仅返回公共的数据即可<br>在主题下的functions.php中声明如下函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function is_pjax()&#123;   </span><br><span class="line">    return array_key_exists(&apos;HTTP_X_PJAX&apos;, $_SERVER) &amp;&amp; $_SERVER[&apos;HTTP_X_PJAX&apos;];   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>4. typecho页面修改</strong><br>可以在head.php和footer.php等的页面中添加判断，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//请在公共部分加入下面的判断</span><br><span class="line">&lt;?php if (!is_pjax()) &#123; ?&gt;</span><br><span class="line">... //公共数据</span><br><span class="line">&lt;?php &#125; ?&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank" rel="noopener">HTML 5 Web 存储</a><br><a href="https://github.com/welefen/pjax" target="_blank" rel="noopener">pjax</a><br><a href="http://www.w3.org/html/ig/zh/wiki/HTML5/history" target="_blank" rel="noopener">HTML5/history</a></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Ray</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/avatar.jpg" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2014/09/16/MySQL和Hive的GroupBy排序/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2014/11/03/js操作cookie/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'infullstack';
+    
+    var disqus_url = 'https://infullstack.github.io/2014/09/28/typecho使用pjax/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//infullstack.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
