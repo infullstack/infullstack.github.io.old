@@ -1205,6 +1205,9 @@ article .content .caption {
 .v .vlist .vcard .vhead .vsys {
   background: none !important;
 }
+.v .veditor {
+  min-height: 2em !important;
+}
 #footer {
   padding-top: 10px;
   padding-bottom: 10px;
