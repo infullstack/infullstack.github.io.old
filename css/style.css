@@ -1211,12 +1211,12 @@ article .content .caption {
 }
 .v .vlist .vcard .vhead .vsys {
   background: none !important;
-  color: #444;
+  color: #444 !important;
 }
 .v .veditor {
   min-height: 2em !important;
 }
-.v .vlist .vcard .vhead .vsys {
+.v .vlist .vcard .vhead .vname {
   color: #b3b1b1 !important;
 }
 #footer {
