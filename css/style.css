@@ -1204,9 +1204,13 @@ article .content .caption {
 }
 .v .vlist .vcard .vhead .vsys {
   background: none !important;
+  color: #444;
 }
 .v .veditor {
   min-height: 2em !important;
+}
+.v .vlist .vcard .vhead .vsys {
+  color: #b3b1b1 !important;
 }
 #footer {
   padding-top: 10px;

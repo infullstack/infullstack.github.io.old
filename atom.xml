@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infullstack.github.io/"/>
-  <updated>2018-01-04T08:45:52.182Z</updated>
+  <updated>2018-01-04T13:15:11.806Z</updated>
   <id>https://infullstack.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://infullstack.github.io/2018/01/01/2018/"/>
     <id>https://infullstack.github.io/2018/01/01/2018/</id>
     <published>2018-01-01T12:48:49.000Z</published>
-    <updated>2018-01-04T08:45:52.182Z</updated>
+    <updated>2018-01-04T13:15:11.806Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://images.unsplash.com/photo-1451481454041-104482d8e284?auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt=""></p><p>如果不出去走走，你以为这就是全部世界。</p>]]></content>
     
@@ -36,7 +36,9 @@
     </summary>
     
     
-      <category term="2018,life" scheme="https://infullstack.github.io/tags/2018-life/"/>
+      <category term="2018" scheme="https://infullstack.github.io/tags/2018/"/>
+    
+      <category term="life" scheme="https://infullstack.github.io/tags/life/"/>
     
   </entry>
   
