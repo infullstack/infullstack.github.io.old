@@ -1,22 +1,12 @@
 <!DOCTYPE html>
-
-  
-    <html class="light page-post">
-  
-
-
+<html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>聊聊这几年的数据泄漏 | Ray</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  
-    <meta name="keywords" content="安全,数据,互联网," />
-  
-
-  <meta name="description" content="近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。 下面就谈谈自己遇到的几次泄密事件。 CSDN数据泄漏2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。 2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是javaey">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。 下面就谈谈自己遇到的几次泄密事件。 CSDN数据泄漏2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。 2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是javaey">
 <meta name="keywords" content="安全,数据,互联网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="聊聊这几年的数据泄漏">
@@ -27,188 +17,127 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="聊聊这几年的数据泄漏">
 <meta name="twitter:description" content="近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。 下面就谈谈自己遇到的几次泄密事件。 CSDN数据泄漏2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。 2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是javaey">
-
-  
-
-  
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  
-
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
-
-
-  
-    <link rel="stylesheet" href="/css/personal-style.css">
-  
-
-  
-
-  
-
-  
-
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
-
-  
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>聊聊这几年的数据泄漏</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Ray" type="application/atom+xml" />
+    
 </head>
 
 <body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2015/10/28/nba2016赛季前瞻/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2015/10/16/说说我的利器/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&text=聊聊这几年的数据泄漏"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&is_video=false&description=聊聊这几年的数据泄漏"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=聊聊这几年的数据泄漏&body=Check out this article: https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&name=聊聊这几年的数据泄漏&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
 
-
-  
-    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
-  
-
-  <div class="post-header CENTER">
-   
-  <div class="toolbox">
-    <a class="toolbox-entry" href="/">
-      <span class="toolbox-entry-text">Menu</span>
-      <i class="icon-angle-down"></i>
-      <i class="icon-home"></i>
-    </a>
-    <ul class="list-toolbox">
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/archives/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            博客
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/category/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            分类
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/tag/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            标签
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/link/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            友链
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/about/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            关于
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/atom.xml"
-            rel="noopener noreferrer"
-            target="_blank"
-            >
-            RSS
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/search/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-
-
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSDN数据泄漏"><span class="toc-number">1.</span> <span class="toc-text">CSDN数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汉庭如家2000万账户泄漏"><span class="toc-number">2.</span> <span class="toc-text">汉庭如家2000万账户泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QQ数据泄漏"><span class="toc-number">3.</span> <span class="toc-text">QQ数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12306账户数据泄密"><span class="toc-number">4.</span> <span class="toc-text">12306账户数据泄密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易邮箱"><span class="toc-number">5.</span> <span class="toc-text">网易邮箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">6.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么规避账户泄漏"><span class="toc-number">7.</span> <span class="toc-text">怎么规避账户泄漏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我的银行密码设置方法"><span class="toc-number">7.1.</span> <span class="toc-text">我的银行密码设置方法</span></a></li></ol></li></ol>
+    </div>
+  </span>
 </div>
 
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        聊聊这几年的数据泄漏
+    </h1>
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">Posts List</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSDN数据泄漏"><span class="toc-text">CSDN数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汉庭如家2000万账户泄漏"><span class="toc-text">汉庭如家2000万账户泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QQ数据泄漏"><span class="toc-text">QQ数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12306账户数据泄密"><span class="toc-text">12306账户数据泄密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易邮箱"><span class="toc-text">网易邮箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么规避账户泄漏"><span class="toc-text">怎么规避账户泄漏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我的银行密码设置方法"><span class="toc-text">我的银行密码设置方法</span></a></li></ol></li></ol>
-  </div>
 
 
-
-<div class="content content-post CENTER">
-   <article id="post-聊聊这几年的数据泄漏" class="article article-type-post" itemprop="blogPost">
-  <header class="article-header">
-    <h1 class="post-title">聊聊这几年的数据泄漏</h1>
-
-    <div class="article-meta">
-      <span>
-        <i class="icon-calendar"></i>
-        <span>2015.10.20</span>
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ray</span>
       </span>
-
       
-        <span class="article-author">
-          <i class="icon-user"></i>
-          <span>Ray</span>
-        </span>
-      
-
-      
-  <span class="article-category">
-    <i class="icon-list"></i>
-    <a class="article-category-link" href="/categories/观点感悟/">观点感悟</a>
-  </span>
-
+    <div class="postdate">
+        <time datetime="2015-10-20T12:27:10.000Z" itemprop="datePublished">2015-10-20</time>
+    </div>
 
 
       
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/互联网/">互联网</a>, <a class="tag-link" href="/tags/安全/">安全</a>, <a class="tag-link" href="/tags/数据/">数据</a>
+    </div>
 
-      
-      <i class="fa fa-eye"></i> 
-        <span id="busuanzi_container_page_pv">
-           &nbsp热度 <span id="busuanzi_value_page_pv">
-           <i class="fa fa-spinner fa-spin"></i></span>℃
-        </span>
-      
 
-      
-      
     </div>
   </header>
+  
 
-  <div class="article-content">
-    
-      <p>近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。</p>
+  <div class="content" itemprop="articleBody">
+    <p>近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。</p>
 <p>下面就谈谈自己遇到的几次泄密事件。</p>
 <h2 id="CSDN数据泄漏"><a href="#CSDN数据泄漏" class="headerlink" title="CSDN数据泄漏"></a>CSDN数据泄漏</h2><p>2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。</p>
 <p>2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是<a href="http://iteye.com" target="_blank" rel="noopener">javaeye</a>和<a href="http://www.csdn.net" target="_blank" rel="noopener">CSDN</a>，所以我的账户也在泄漏数据之列。那个时候我的所有密码基本一致，虽然那个时候对我并没有造成过多的影响，但那时我就意识到帐号数据都处在很危险的地方。</p>
@@ -238,194 +167,95 @@
 </ul>
 <h3 id="我的银行密码设置方法"><a href="#我的银行密码设置方法" class="headerlink" title="我的银行密码设置方法"></a>我的银行密码设置方法</h3><p>卡号选几位  再利用各种运算符（加减乘除左移右移等）得出一个公式，算出一个密码。这样，只要有卡号，我就有密码了。(<em>^__^</em>) 嘻嘻</p>
 
-    
   </div>
 </article>
 
 
-   
 
-   
-
-
-
-</div>
-
-
-  <a id="backTop" class="back-top">
-    <i class="icon-angle-up"></i>
-  </a>
-
-
-
-
-  <div class="modal" id="modal">
-  <span id="cover" class="cover hide"></span>
-  <div id="modal-dialog" class="modal-dialog hide-dialog">
-    <div class="modal-header">
-      <span id="close" class="btn-close">Close</span>
     </div>
-    <hr>
-    <div class="modal-body">
-      <ul class="list-toolbox">
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/archives/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              博客
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/category/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              分类
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/tag/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              标签
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/link/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              友链
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/about/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              关于
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/atom.xml"
-              rel="noopener noreferrer"
-              target="_blank"
-              >
-              RSS
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/search/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              搜索
-            </a>
-          </li>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSDN数据泄漏"><span class="toc-number">1.</span> <span class="toc-text">CSDN数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汉庭如家2000万账户泄漏"><span class="toc-number">2.</span> <span class="toc-text">汉庭如家2000万账户泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QQ数据泄漏"><span class="toc-number">3.</span> <span class="toc-text">QQ数据泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12306账户数据泄密"><span class="toc-number">4.</span> <span class="toc-text">12306账户数据泄密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网易邮箱"><span class="toc-number">5.</span> <span class="toc-text">网易邮箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">6.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么规避账户泄漏"><span class="toc-number">7.</span> <span class="toc-text">怎么规避账户泄漏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我的银行密码设置方法"><span class="toc-number">7.1.</span> <span class="toc-text">我的银行密码设置方法</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&text=聊聊这几年的数据泄漏"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&is_video=false&description=聊聊这几年的数据泄漏"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=聊聊这几年的数据泄漏&body=Check out this article: https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&title=聊聊这几年的数据泄漏"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/2015/10/20/聊聊这几年的数据泄漏/&name=聊聊这几年的数据泄漏&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
   </div>
 </div>
 
-
-
-  
-      <div class="fexo-comments comments-post">
     
-
-    
-
-
-
-
-    
-
-    
-	
-    
-
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <div id="comment" class="vcomment" ></div>
-    <script>
-        var notify = 'false' == true ? true : false;
-        var verify = 'false' == true ? true : false;
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-            return GUEST_INFO.indexOf(item) > -1
-        });
-        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
-        window.valine = new Valine({
-            el: '.vcomment',
-            notify: notify,
-            verify: verify,
-            appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
-            appKey: "fWpVsIuv12f5WUQtCVLfb9px",
-            avatar:'mm',
-            placeholder: "Just go go",
-            guest_info:guest_info,
-            pageSize:'10'
-        });
-    </script>
-  	
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ray
   </div>
-
-  
-
-  <script type="text/javascript">
-  function loadScript(url, callback) {
-    var script = document.createElement('script')
-    script.type = 'text/javascript';
-
-    if (script.readyState) { //IE
-      script.onreadystatechange = function() {
-        if (script.readyState == 'loaded' ||
-          script.readyState == 'complete') {
-          script.onreadystatechange = null;
-          callback();
-        }
-      };
-    } else { //Others
-      script.onload = function() {
-        callback();
-      };
-    }
-
-    script.src = url;
-    document.getElementsByTagName('head')[0].appendChild(script);
-  }
-
-  window.onload = function() {
-    loadScript('/js/bundle.js?235683', function() {
-      // load success
-    });
-  }
-</script>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
 
 </body>
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

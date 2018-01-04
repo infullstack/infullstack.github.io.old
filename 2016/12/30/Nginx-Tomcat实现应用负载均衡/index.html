@@ -1,22 +1,12 @@
 <!DOCTYPE html>
-
-  
-    <html class="light page-post">
-  
-
-
+<html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Nginx+Tomcat实现应用负载均衡 | Ray</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  
-    <meta name="keywords" content="nginx,tomcat,负载均衡," />
-  
-
-  <meta name="description" content="概述当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。 部署架构图 特点：当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。该架构适用于无状态共享的应用服务，因为session并没有设置共享。 用到工具 nginx 1.10 tomcat 1.8  环境准">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="概述当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。 部署架构图 特点：当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。该架构适用于无状态共享的应用服务，因为session并没有设置共享。 用到工具 nginx 1.10 tomcat 1.8  环境准">
 <meta name="keywords" content="nginx,tomcat,负载均衡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx+Tomcat实现应用负载均衡">
@@ -31,188 +21,127 @@
 <meta name="twitter:title" content="Nginx+Tomcat实现应用负载均衡">
 <meta name="twitter:description" content="概述当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。 部署架构图 特点：当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。该架构适用于无状态共享的应用服务，因为session并没有设置共享。 用到工具 nginx 1.10 tomcat 1.8  环境准">
 <meta name="twitter:image" content="http://infullstack.com/wp-content/uploads/2016/12/nginx_tomcat.png">
-
-  
-
-  
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  
-
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
-
-
-  
-    <link rel="stylesheet" href="/css/personal-style.css">
-  
-
-  
-
-  
-
-  
-
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
-
-  
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Nginx+Tomcat实现应用负载均衡</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Ray" type="application/atom+xml" />
+    
 </head>
 
 <body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/01/03/JFinal增加简单权限认证功能/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/12/09/实现shell并发/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&text=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&is_video=false&description=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nginx+Tomcat实现应用负载均衡&body=Check out this article: https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&name=Nginx+Tomcat实现应用负载均衡&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
 
-
-  
-    <span id="toolbox-mobile" class="toolbox-mobile">Menu</span>
-  
-
-  <div class="post-header CENTER">
-   
-  <div class="toolbox">
-    <a class="toolbox-entry" href="/">
-      <span class="toolbox-entry-text">Menu</span>
-      <i class="icon-angle-down"></i>
-      <i class="icon-home"></i>
-    </a>
-    <ul class="list-toolbox">
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/archives/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            博客
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/category/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            分类
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/tag/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            标签
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/link/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            友链
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/about/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            关于
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/atom.xml"
-            rel="noopener noreferrer"
-            target="_blank"
-            >
-            RSS
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
-            href="/search/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  </div>
-
-
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用到工具"><span class="toc-number">1.1.</span> <span class="toc-text">用到工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-number">1.2.</span> <span class="toc-text">环境准备</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置tomcat"><span class="toc-number">2.</span> <span class="toc-text">配置tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置端口-conf-server-xml"><span class="toc-number">2.1.</span> <span class="toc-text">配置端口(conf/server.xml)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增首页"><span class="toc-number">2.2.</span> <span class="toc-text">新增首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动tomcat"><span class="toc-number">2.3.</span> <span class="toc-text">启动tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置tomcat2"><span class="toc-number">2.4.</span> <span class="toc-text">配置tomcat2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Nginx"><span class="toc-number">3.</span> <span class="toc-text">部署Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-安装"><span class="toc-number">4.</span> <span class="toc-text">Nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置nginx"><span class="toc-number">4.1.</span> <span class="toc-text">配置nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动和访问Nginx"><span class="toc-number">5.</span> <span class="toc-text">启动和访问Nginx</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Nginx+Tomcat实现应用负载均衡
+    </h1>
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">Posts List</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用到工具"><span class="toc-text">用到工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-text">环境准备</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置tomcat"><span class="toc-text">配置tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置端口-conf-server-xml"><span class="toc-text">配置端口(conf/server.xml)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增首页"><span class="toc-text">新增首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动tomcat"><span class="toc-text">启动tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置tomcat2"><span class="toc-text">配置tomcat2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Nginx"><span class="toc-text">部署Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-安装"><span class="toc-text">Nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置nginx"><span class="toc-text">配置nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动和访问Nginx"><span class="toc-text">启动和访问Nginx</span></a></li></ol>
-  </div>
 
 
-
-<div class="content content-post CENTER">
-   <article id="post-Nginx-Tomcat实现应用负载均衡" class="article article-type-post" itemprop="blogPost">
-  <header class="article-header">
-    <h1 class="post-title">Nginx+Tomcat实现应用负载均衡</h1>
-
-    <div class="article-meta">
-      <span>
-        <i class="icon-calendar"></i>
-        <span>2016.12.30</span>
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ray</span>
       </span>
-
       
-        <span class="article-author">
-          <i class="icon-user"></i>
-          <span>Ray</span>
-        </span>
-      
-
-      
-  <span class="article-category">
-    <i class="icon-list"></i>
-    <a class="article-category-link" href="/categories/编程技术/">编程技术</a>
-  </span>
-
+    <div class="postdate">
+        <time datetime="2016-12-30T09:01:57.000Z" itemprop="datePublished">2016-12-30</time>
+    </div>
 
 
       
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/nginx/">nginx</a>, <a class="tag-link" href="/tags/tomcat/">tomcat</a>, <a class="tag-link" href="/tags/负载均衡/">负载均衡</a>
+    </div>
 
-      
-      <i class="fa fa-eye"></i> 
-        <span id="busuanzi_container_page_pv">
-           &nbsp热度 <span id="busuanzi_value_page_pv">
-           <i class="fa fa-spinner fa-spin"></i></span>℃
-        </span>
-      
 
-      
-      
     </div>
   </header>
+  
 
-  <div class="article-content">
-    
-      <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。</p>
+  <div class="content" itemprop="articleBody">
+    <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>当单个应用服务器压力过大时，可以使用多个应用服务器提供服务减轻单服务器的压力，再结合一个代理转发服务器，完成tomcat的负载均衡。</p>
 <p>部署架构图<br><img src="http://infullstack.com/wp-content/uploads/2016/12/nginx_tomcat.png" alt="" width="500" class="aligncenter size-full wp-image-100"></p>
 <p>特点：<br>当请求达到nginx，nginx会根据weight和配置的服务器列表，完成请求的转发，实现应用服务器的负载均衡。<br>该架构适用于无状态共享的应用服务，因为session并没有设置共享。</p>
 <h3 id="用到工具"><a href="#用到工具" class="headerlink" title="用到工具"></a>用到工具</h3><ul>
@@ -237,194 +166,95 @@
 <p><img src="http://infullstack.com/wp-content/uploads/2016/12/41.png" alt="" width="505" height="142" class="alignnone size-full wp-image-101"><br><img src="http://infullstack.com/wp-content/uploads/2016/12/42.png" alt="" width="586" height="189" class="alignnone size-full wp-image-102"></p>
 <p>根据应用服务器的配置和需求，可以修改weight，配置服务器的权重。</p>
 
-    
   </div>
 </article>
 
 
-   
 
-   
-
-
-
-</div>
-
-
-  <a id="backTop" class="back-top">
-    <i class="icon-angle-up"></i>
-  </a>
-
-
-
-
-  <div class="modal" id="modal">
-  <span id="cover" class="cover hide"></span>
-  <div id="modal-dialog" class="modal-dialog hide-dialog">
-    <div class="modal-header">
-      <span id="close" class="btn-close">Close</span>
     </div>
-    <hr>
-    <div class="modal-body">
-      <ul class="list-toolbox">
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/archives/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              博客
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/category/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              分类
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/tag/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              标签
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/link/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              友链
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/about/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              关于
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/atom.xml"
-              rel="noopener noreferrer"
-              target="_blank"
-              >
-              RSS
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/search/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              搜索
-            </a>
-          </li>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
         
       </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用到工具"><span class="toc-number">1.1.</span> <span class="toc-text">用到工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境准备"><span class="toc-number">1.2.</span> <span class="toc-text">环境准备</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置tomcat"><span class="toc-number">2.</span> <span class="toc-text">配置tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置端口-conf-server-xml"><span class="toc-number">2.1.</span> <span class="toc-text">配置端口(conf/server.xml)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增首页"><span class="toc-number">2.2.</span> <span class="toc-text">新增首页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动tomcat"><span class="toc-number">2.3.</span> <span class="toc-text">启动tomcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置tomcat2"><span class="toc-number">2.4.</span> <span class="toc-text">配置tomcat2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署Nginx"><span class="toc-number">3.</span> <span class="toc-text">部署Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx-安装"><span class="toc-number">4.</span> <span class="toc-text">Nginx 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置nginx"><span class="toc-number">4.1.</span> <span class="toc-text">配置nginx</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动和访问Nginx"><span class="toc-number">5.</span> <span class="toc-text">启动和访问Nginx</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&text=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&is_video=false&description=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nginx+Tomcat实现应用负载均衡&body=Check out this article: https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&title=Nginx+Tomcat实现应用负载均衡"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/2016/12/30/Nginx-Tomcat实现应用负载均衡/&name=Nginx+Tomcat实现应用负载均衡&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
   </div>
 </div>
 
-
-
-  
-      <div class="fexo-comments comments-post">
     
-
-    
-
-
-
-
-    
-
-    
-	
-    
-
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <div id="comment" class="vcomment" ></div>
-    <script>
-        var notify = 'false' == true ? true : false;
-        var verify = 'false' == true ? true : false;
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-            return GUEST_INFO.indexOf(item) > -1
-        });
-        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
-        window.valine = new Valine({
-            el: '.vcomment',
-            notify: notify,
-            verify: verify,
-            appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
-            appKey: "fWpVsIuv12f5WUQtCVLfb9px",
-            avatar:'mm',
-            placeholder: "Just go go",
-            guest_info:guest_info,
-            pageSize:'10'
-        });
-    </script>
-  	
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ray
   </div>
-
-  
-
-  <script type="text/javascript">
-  function loadScript(url, callback) {
-    var script = document.createElement('script')
-    script.type = 'text/javascript';
-
-    if (script.readyState) { //IE
-      script.onreadystatechange = function() {
-        if (script.readyState == 'loaded' ||
-          script.readyState == 'complete') {
-          script.onreadystatechange = null;
-          callback();
-        }
-      };
-    } else { //Others
-      script.onload = function() {
-        callback();
-      };
-    }
-
-    script.src = url;
-    document.getElementsByTagName('head')[0].appendChild(script);
-  }
-
-  window.onload = function() {
-    loadScript('/js/bundle.js?235683', function() {
-      // load success
-    });
-  }
-</script>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
 
 </body>
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
