@@ -39,22 +39,20 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
+    <title>Hello Hexo</title>
     <link href="https://infullstack.github.io/2017/12/27/hello-world/"/>
     <id>https://infullstack.github.io/2017/12/27/hello-world/</id>
     <published>2017-12-27T02:21:00.000Z</published>
-    <updated>2018-01-04T08:13:33.699Z</updated>
+    <updated>2018-01-04T08:22:47.055Z</updated>
     
-    <content type="html"><![CDATA[<p>用了几个小时，选取了以前各个博客系统的主要文章，同步到了hexo，算是一个新的开始。</p><p>用了hexo，发现hexo是一个很美好的博客系统。</p><p>enjoy it.</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="https://images.unsplash.com/photo-1507752533523-5186b0bc4c43?auto=format&amp;fit=crop&amp;w=1351&amp;q=80" alt=""></p><p>已经很长时间没有管理博客了，在2018快要到来之前，用了几个小时，在github上部署了Hexo，选取了以前各个博客系统的主要文章，同步到了hexo，算是一个新的开始。</p><p>用了hexo，发现hexo是一个很美好的博客系统。</p><h2 id="我的Hexo配置"><a href="#我的Hexo配置" class="headerlink" title="我的Hexo配置"></a>我的Hexo配置</h2><p>theme: <a href="https://github.com/probberechts/cactus-dark" target="_blank" rel="noopener">cactus-dark</a><br>comment: <a href="https://valine.js.org/#/?id=valine" target="_blank" rel="noopener">valine</a></p><p>enjoy it.</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;用了几个小时，选取了以前各个博客系统的主要文章，同步到了hexo，算是一个新的开始。&lt;/p&gt;
-&lt;p&gt;用了hexo，发现hexo是一个很美好的博客系统。&lt;/p&gt;
-&lt;p&gt;enjoy it.&lt;/p&gt;
-
+        &lt;p&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1507752533523-5186b0bc4c43?auto=format&amp;amp;fit=crop&amp;amp;w=1351&amp;amp;q=80&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;已经很长时
       
     
     </summary>
