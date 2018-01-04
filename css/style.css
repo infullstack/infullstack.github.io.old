@@ -1203,7 +1203,7 @@ article .content .caption {
   color: #444 !important;
 }
 .v .vlist .vcard .vhead .vsys {
-  background: #ededed;
+  background: none;
 }
 #footer {
   padding-top: 10px;
