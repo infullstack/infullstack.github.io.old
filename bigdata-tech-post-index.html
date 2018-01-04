@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="存储格式 深入分析Parquet列式存储格式 大数据开源列式存储引擎Parquet和ORC Hive:ORC File Format存储格式详解  文件系统 HDFS 原理、架构与特性介绍 HDFS的运行原理 Namenode HA原理详解 Apache Kudu 加速对频繁更新数据的分析 基于内存的统一分布式存储系统 Alluxio 及其应用  计算引擎 MapReduce框架详解 MapRe">
+<meta name="keywords" content="大数据,hadoop,parquet,hdfs,spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据技术文章索引">
+<meta property="og:url" content="https://infullstack.github.io/bigdata-tech-post-index.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="存储格式 深入分析Parquet列式存储格式 大数据开源列式存储引擎Parquet和ORC Hive:ORC File Format存储格式详解  文件系统 HDFS 原理、架构与特性介绍 HDFS的运行原理 Namenode HA原理详解 Apache Kudu 加速对频繁更新数据的分析 基于内存的统一分布式存储系统 Alluxio 及其应用  计算引擎 MapReduce框架详解 MapRe">
+<meta property="og:image" content="http://okzvb3705.bkt.clouddn.com/filip-gielda-94858.jpg?imageView2/1/w/2400/h/800/">
+<meta property="og:updated_time" content="2018-01-04T13:53:30.946Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据技术文章索引">
+<meta name="twitter:description" content="存储格式 深入分析Parquet列式存储格式 大数据开源列式存储引擎Parquet和ORC Hive:ORC File Format存储格式详解  文件系统 HDFS 原理、架构与特性介绍 HDFS的运行原理 Namenode HA原理详解 Apache Kudu 加速对频繁更新数据的分析 基于内存的统一分布式存储系统 Alluxio 及其应用  计算引擎 MapReduce框架详解 MapRe">
+<meta name="twitter:image" content="http://okzvb3705.bkt.clouddn.com/filip-gielda-94858.jpg?imageView2/1/w/2400/h/800/">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>大数据技术文章索引</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Ray" type="application/atom+xml" />
+    
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/hello.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/shell-row.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/bigdata-tech-post-index.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/bigdata-tech-post-index.html&text=大数据技术文章索引"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/bigdata-tech-post-index.html&is_video=false&description=大数据技术文章索引"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=大数据技术文章索引&body=Check out this article: https://infullstack.github.io/bigdata-tech-post-index.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/bigdata-tech-post-index.html&name=大数据技术文章索引&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#存储格式"><span class="toc-number">1.</span> <span class="toc-text">存储格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统"><span class="toc-number">2.</span> <span class="toc-text">文件系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算引擎"><span class="toc-number">3.</span> <span class="toc-text">计算引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源管理"><span class="toc-number">4.</span> <span class="toc-text">资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务调度"><span class="toc-number">5.</span> <span class="toc-text">任务调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL"><span class="toc-number">6.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL引擎"><span class="toc-number">7.</span> <span class="toc-text">SQL引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流处理"><span class="toc-number">8.</span> <span class="toc-text">流处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息队列"><span class="toc-number">9.</span> <span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据采集"><span class="toc-number">10.</span> <span class="toc-text">数据采集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">11.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">12.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全文检索"><span class="toc-number">13.</span> <span class="toc-text">全文检索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#机器学习"><span class="toc-number">14.</span> <span class="toc-text">机器学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">15.</span> <span class="toc-text">其他</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        大数据技术文章索引
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ray</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-07-05T09:00:44.000Z" itemprop="datePublished">05 Jul 2017</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/hadoop/">hadoop</a>, <a class="tag-link" href="/tags/hdfs/">hdfs</a>, <a class="tag-link" href="/tags/parquet/">parquet</a>, <a class="tag-link" href="/tags/spark/">spark</a>, <a class="tag-link" href="/tags/大数据/">大数据</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="http://okzvb3705.bkt.clouddn.com/filip-gielda-94858.jpg?imageView2/1/w/2400/h/800/" alt=""></p>
+<h2 id="存储格式"><a href="#存储格式" class="headerlink" title="存储格式"></a>存储格式</h2><ul>
+<li><a href="http://www.infoq.com/cn/articles/in-depth-analysis-of-parquet-column-storage-format" target="_blank" rel="noopener">深入分析Parquet列式存储格式</a></li>
+<li><a href="http://dongxicheng.org/mapreduce-nextgen/columnar-storage-parquet-and-orc/" target="_blank" rel="noopener">大数据开源列式存储引擎Parquet和ORC</a></li>
+<li><a href="https://www.iteblog.com/archives/1014.html" target="_blank" rel="noopener">Hive:ORC File Format存储格式详解</a></li>
+</ul>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
+<li><a href="http://www.uml.org.cn/sjjm/201309044.asp" target="_blank" rel="noopener">HDFS 原理、架构与特性介绍</a></li>
+<li><a href="http://blog.csdn.net/weixuehao/article/details/16967485" target="_blank" rel="noopener">HDFS的运行原理</a></li>
+<li><a href="http://www.it165.net/admin/html/201407/3465.html" target="_blank" rel="noopener">Namenode HA原理详解</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/25928166" target="_blank" rel="noopener">Apache Kudu 加速对频繁更新数据的分析</a></li>
+<li><a href="http://www.leiphone.com/news/201610/rRTDqNk6lQrInqje.html" target="_blank" rel="noopener">基于内存的统一分布式存储系统 Alluxio 及其应用</a></li>
+</ul>
+<h2 id="计算引擎"><a href="#计算引擎" class="headerlink" title="计算引擎"></a>计算引擎</h2><ul>
+<li><a href="http://blog.jobbole.com/84089/" target="_blank" rel="noopener">MapReduce框架详解</a></li>
+<li><a href="http://langyu.iteye.com/blog/992916" target="_blank" rel="noopener">MapReduce:详解Shuffle过程</a></li>
+<li><a href="http://blog.csdn.net/lovehuangjiaju/article/details/48634607" target="_blank" rel="noopener">Spark运行原理</a></li>
+<li><a href="http://tech.meituan.com/spark-tuning-basic.html" target="_blank" rel="noopener">Spark性能优化指南</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-apache-flink/" target="_blank" rel="noopener">新一代大数据处理引擎 Apache Flink</a></li>
+<li><a href="http://shiyanjun.cn/archives/1508.html" target="_blank" rel="noopener">Apache Flink：特性、概念、组件栈、架构及原理分析</a></li>
+</ul>
+<h2 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h2><h2 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h2><ul>
+<li><a href="http://shiyanjun.cn/archives/1002.html" target="_blank" rel="noopener">Hue安装配置实践</a></li>
+<li><a href="http://www.cnblogs.com/smartloli/p/5191155.html" target="_blank" rel="noopener">Azkaban 作业调度</a></li>
+</ul>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><ul>
+<li><a href="http://blog.csdn.net/dbanote/article/details/8897599" target="_blank" rel="noopener">[HBase] LSM树 VS B+树</a></li>
+<li><a href="https://yq.aliyun.com/articles/70467" target="_blank" rel="noopener">HBase在阿里的应用实践</a></li>
+</ul>
+<h2 id="SQL引擎"><a href="#SQL引擎" class="headerlink" title="SQL引擎"></a>SQL引擎</h2><ul>
+<li><a href="http://www.csdn.net/article/2013-12-04/2817707-Impala-Big-Data-Engine" target="_blank" rel="noopener">Impala：新一代开源大数据分析引擎</a></li>
+<li><a href="http://www.infoq.com/cn/articles/apache-kylin-algorithm/" target="_blank" rel="noopener">Apache Kylin的快速数据立方体算法——概述</a></li>
+<li><a href="http://tech.meituan.com/presto.html" target="_blank" rel="noopener">Presto实现原理和美团的使用实践</a></li>
+</ul>
+<h2 id="流处理"><a href="#流处理" class="headerlink" title="流处理"></a>流处理</h2><ul>
+<li><a href="http://shiyanjun.cn/archives/1472.html" target="_blank" rel="noopener">Apache Storm内部原理分析</a></li>
+</ul>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><ul>
+<li><a href="http://tech.meituan.com/mq-design.html" target="_blank" rel="noopener">消息队列设计精要</a></li>
+<li><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="noopener">Kafka深度解析</a></li>
+<li><p><a href="http://tech.meituan.com/kafka-fs-design-theory.html" target="_blank" rel="noopener">Kafka文件存储机制那些事</a></p>
+<h2 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h2></li>
+<li><p><a href="https://my.oschina.net/leejun2005/blog/288136" target="_blank" rel="noopener">Flume NG 简介及配置实战</a></p>
+</li>
+<li><a href="http://shiyanjun.cn/archives/1497.html" target="_blank" rel="noopener">Flume日志收集分层架构应用实践</a></li>
+<li><a href="http://student-lp.iteye.com/blog/2157983" target="_blank" rel="noopener">Sqoop详解</a></li>
+<li><a href="http://tech.meituan.com/mt-log-system-arch.html" target="_blank" rel="noopener">基于Flume的美团日志收集系统(一)架构和设计</a></li>
+</ul>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ul>
+<li><a href="http://www.infoq.com/cn/articles/kylin-apache-in-meituan-olap-scenarios-practice" target="_blank" rel="noopener">Apache Kylin在美团数十亿数据OLAP场景下的实践</a></li>
+<li><a href="http://tech.meituan.com/spark-in-meituan.html" target="_blank" rel="noopener">Spark在美团的实践</a></li>
+<li><a href="http://mp.weixin.qq.com/s/OJdlpP62YWGmVnBWsfpVZw" target="_blank" rel="noopener">携程实时用户行为系统实践</a></li>
+</ul>
+<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><ul>
+<li><a href="http://www.shaheng.me/blog/2015/06/elasticsearch--.html" target="_blank" rel="noopener">Elasticsearch架构原理</a></li>
+<li><p><a href="http://solr-vs-elasticsearch.com/" target="_blank" rel="noopener">solr vs elasticsearch 功能比较</a></p>
+<h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2></li>
+<li><p><a href="https://www.ibm.com/developerworks/cn/java/j-mahout/" target="_blank" rel="noopener">Apache Mahout 简介</a></p>
+</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><a href="http://mp.weixin.qq.com/s/mO9Ht3pBlvDUFd-cUmz99w" target="_blank" rel="noopener">谷歌新发布的分布式数据库服务，是要打破CAP定理了吗？</a></li>
+<li><a href="https://m.aliyun.com/yunqi/articles/67000?tk=7msDtByJNMqIx7H1CqaPNnPbyUQ36CfaBHCMB9l9R4w%3D" target="_blank" rel="noopener">分布式(hadoop)内核研发面试指南</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        
+        
+        <div class="vcomment"></div>
+        
+    </div>
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#存储格式"><span class="toc-number">1.</span> <span class="toc-text">存储格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件系统"><span class="toc-number">2.</span> <span class="toc-text">文件系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算引擎"><span class="toc-number">3.</span> <span class="toc-text">计算引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资源管理"><span class="toc-number">4.</span> <span class="toc-text">资源管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务调度"><span class="toc-number">5.</span> <span class="toc-text">任务调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL"><span class="toc-number">6.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL引擎"><span class="toc-number">7.</span> <span class="toc-text">SQL引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流处理"><span class="toc-number">8.</span> <span class="toc-text">流处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息队列"><span class="toc-number">9.</span> <span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据采集"><span class="toc-number">10.</span> <span class="toc-text">数据采集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法"><span class="toc-number">11.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例"><span class="toc-number">12.</span> <span class="toc-text">案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全文检索"><span class="toc-number">13.</span> <span class="toc-text">全文检索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#机器学习"><span class="toc-number">14.</span> <span class="toc-text">机器学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">15.</span> <span class="toc-text">其他</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/bigdata-tech-post-index.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/bigdata-tech-post-index.html&text=大数据技术文章索引"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/bigdata-tech-post-index.html&is_video=false&description=大数据技术文章索引"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=大数据技术文章索引&body=Check out this article: https://infullstack.github.io/bigdata-tech-post-index.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/bigdata-tech-post-index.html&title=大数据技术文章索引"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/bigdata-tech-post-index.html&name=大数据技术文章索引&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ray
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
+        appKey: "fWpVsIuv12f5WUQtCVLfb9px",
+        avatar:"mm",
+        placeholder: "念念不忘,必有回响.",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+
+</body>
+</html>

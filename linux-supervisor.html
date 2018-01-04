@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="概述Supervisor是由python语言编写，基于linux操作系统的一款服务器管理工具，用以监控服务器的运行，发现问题能立即自动预警及自动重启等功能。 基础环境 Centos 6.5 Python 2.6.6  软件安装 supervisor meld(python html模版引擎)  下载地址： meld3 http://www.plope.com/software/meld3/meld">
+<meta name="keywords" content="linux,supervisor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux配置supervisor管理进程">
+<meta property="og:url" content="https://infullstack.github.io/linux-supervisor.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="概述Supervisor是由python语言编写，基于linux操作系统的一款服务器管理工具，用以监控服务器的运行，发现问题能立即自动预警及自动重启等功能。 基础环境 Centos 6.5 Python 2.6.6  软件安装 supervisor meld(python html模版引擎)  下载地址： meld3 http://www.plope.com/software/meld3/meld">
+<meta property="og:image" content="http://infullstack.com/wp-content/uploads/2016/12/supervisor.png">
+<meta property="og:updated_time" content="2018-01-04T13:58:00.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux配置supervisor管理进程">
+<meta name="twitter:description" content="概述Supervisor是由python语言编写，基于linux操作系统的一款服务器管理工具，用以监控服务器的运行，发现问题能立即自动预警及自动重启等功能。 基础环境 Centos 6.5 Python 2.6.6  软件安装 supervisor meld(python html模版引擎)  下载地址： meld3 http://www.plope.com/software/meld3/meld">
+<meta name="twitter:image" content="http://infullstack.com/wp-content/uploads/2016/12/supervisor.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Linux配置supervisor管理进程</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Ray" type="application/atom+xml" />
+    
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/shell-concruent.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/collect-jmap-jstack.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/linux-supervisor.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/linux-supervisor.html&text=Linux配置supervisor管理进程"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/linux-supervisor.html&is_video=false&description=Linux配置supervisor管理进程"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux配置supervisor管理进程&body=Check out this article: https://infullstack.github.io/linux-supervisor.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/linux-supervisor.html&name=Linux配置supervisor管理进程&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础环境"><span class="toc-number">2.</span> <span class="toc-text">基础环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件安装"><span class="toc-number">3.</span> <span class="toc-text">软件安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件配置"><span class="toc-number">4.</span> <span class="toc-text">文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动监控"><span class="toc-number">5.</span> <span class="toc-text">启动监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#supervisorctl管理程序进程"><span class="toc-number">6.</span> <span class="toc-text">supervisorctl管理程序进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加程序启动停止脚本"><span class="toc-number">7.</span> <span class="toc-text">增加程序启动停止脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概述-1"><span class="toc-number">8.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装配置Supervisor"><span class="toc-number">9.</span> <span class="toc-text">安装配置Supervisor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置-etc-supervisord-conf"><span class="toc-number">10.</span> <span class="toc-text">配置/etc/supervisord.conf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备注"><span class="toc-number">11.</span> <span class="toc-text">备注</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Linux配置supervisor管理进程
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ray</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-12-09T03:15:19.000Z" itemprop="datePublished">09 Dec 2016</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/supervisor/">supervisor</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Supervisor是由python语言编写，基于linux操作系统的一款服务器管理工具，<br>用以监控服务器的运行，发现问题能立即自动预警及自动重启等功能。</p>
+<h3 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h3><ul>
+<li>Centos 6.5</li>
+<li>Python 2.6.6</li>
+</ul>
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><ul>
+<li>supervisor</li>
+<li>meld(python html模版引擎)</li>
+</ul>
+<p>下载地址：</p>
+<p>meld3 <a href="http://www.plope.com/software/meld3/meld3-0.6.5.tar.gz" target="_blank" rel="noopener">http://www.plope.com/software/meld3/meld3-0.6.5.tar.gz</a></p>
+<p>supervisor</p>
+<p><a href="http://pypi.python.org/packages/source/s/supervisor/supervisor-3.0b1.tar.gz" target="_blank" rel="noopener">http://pypi.python.org/packages/source/s/supervisor/supervisor-3.0b1.tar.gz</a></p>
+<p>下载解压，分别执行python setup.py install安装</p>
+<h3 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h3><ol>
+<li>创建配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+<ol>
+<li>修改配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 增加web监控服务</span><br><span class="line">[inet_http_server]         ; inet (TCP) server disabled by default</span><br><span class="line">port=0.0.0.0:9001        ; (ip_address:port specifier, *:port for all iface)</span><br><span class="line">username=user              ; (default is no username (open server))</span><br><span class="line">password=123               ; (default is no password (open server))</span><br><span class="line"></span><br><span class="line"># 增加监控程序</span><br><span class="line">[program:tail1]                                                                            </span><br><span class="line">command=tail -f  /etc/supervisord.conf   ;常驻后台的命令</span><br><span class="line">autostart=true                           ;是否随supervisor启动</span><br><span class="line">autorestart=true                         ;是否在挂了之后重启，意外关闭后会重启，比如kill掉！</span><br><span class="line">startretries=3                           ;启动尝试次数</span><br><span class="line">stderr_logfile=/tmp/tail1.err.log        ;标准输出的位置</span><br><span class="line">stdout_logfile=/tmp/tail1.out.log        ;标准错误输出的位置</span><br><span class="line"></span><br><span class="line"># 也可以监控目录下配置文件，监控/etc/supervisord.d/目录下conf后缀文件，conf中配置监控程序</span><br><span class="line">[include]</span><br><span class="line">files=/etc/supervisord.d/*.conf</span><br></pre></td></tr></table></figure>
+<h3 id="启动监控"><a href="#启动监控" class="headerlink" title="启动监控"></a>启动监控</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/supervisord -c /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>访问浏览器ip:9001</p>
+<p><img src="http://infullstack.com/wp-content/uploads/2016/12/supervisor.png" alt=""></p>
+<h3 id="supervisorctl管理程序进程"><a href="#supervisorctl管理程序进程" class="headerlink" title="supervisorctl管理程序进程"></a>supervisorctl管理程序进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 查询状态</span><br><span class="line">upervisorctl status        </span><br><span class="line"># 开启服务</span><br><span class="line">supervisorctl start hello    </span><br><span class="line"># 关闭服务</span><br><span class="line">supervisorctl stop hello</span><br><span class="line"></span><br><span class="line"># 示例</span><br><span class="line"></span><br><span class="line"># 停止某一个进程(programxxx)，programxxx为[program:chatdemon]里配置的值，这个示例就是programname</span><br><span class="line">supervisorctl stop programname</span><br><span class="line"># 启动某个进程</span><br><span class="line">supervisorctl start programname</span><br><span class="line"># 重启某个进程</span><br><span class="line">supervisorctl restart programname</span><br><span class="line"># 重启所有属于名为groupworker这个分组的进程(start,restart同理)</span><br><span class="line">supervisorctl stop groupworker</span><br><span class="line"># 停止全部进程，注：start、restart、stop都不会载入最新的配置文件</span><br><span class="line">supervisorctl stop all</span><br><span class="line"># 载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程</span><br><span class="line">supervisorctl reload</span><br><span class="line">根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启</span><br><span class="line">supervisorctl update，</span><br></pre></td></tr></table></figure>
+<h3 id="增加程序启动停止脚本"><a href="#增加程序启动停止脚本" class="headerlink" title="增加程序启动停止脚本"></a>增加程序启动停止脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># /etc/init.d/supervisord</span><br><span class="line">#</span><br><span class="line"># Supervisor is a client/server system that</span><br><span class="line"># allows its users to monitor and control a</span><br><span class="line"># number of processes on UNIX-like operating</span><br><span class="line"># systems.</span><br><span class="line">#</span><br><span class="line"># chkconfig: - 64 36</span><br><span class="line"># description: Supervisor Server</span><br><span class="line"># processname: supervisord</span><br><span class="line"> </span><br><span class="line"># Source init functions</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"> </span><br><span class="line">prog=&quot;supervisord&quot;</span><br><span class="line"> </span><br><span class="line">prefix=&quot;/usr&quot;</span><br><span class="line">exec_prefix=&quot;$&#123;prefix&#125;&quot;</span><br><span class="line">prog_bin=&quot;$&#123;exec_prefix&#125;/bin/supervisord&quot;</span><br><span class="line">PIDFILE=&quot;/var/run/$prog.pid&quot;</span><br><span class="line"> </span><br><span class="line">start()</span><br><span class="line">&#123;</span><br><span class="line">       echo -n $&quot;Starting $prog: &quot;</span><br><span class="line">       ###注意下面这一行一定得有-c /etc/supervisord.conf   不然修改了配置文件根本不生效！</span><br><span class="line">       daemon $prog_bin -c /etc/supervisord.conf --pidfile $PIDFILE</span><br><span class="line">       [ -f $PIDFILE ] &amp;&amp; success $&quot;$prog startup&quot; || failure $&quot;$prog startup&quot;</span><br><span class="line">       echo</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">stop()</span><br><span class="line">&#123;</span><br><span class="line">       echo -n $&quot;Shutting down $prog: &quot;</span><br><span class="line">       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $&quot;$prog shutdown&quot;</span><br><span class="line">       echo</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line"> </span><br><span class="line"> start)</span><br><span class="line">   start</span><br><span class="line"> ;;</span><br><span class="line"> </span><br><span class="line"> stop)</span><br><span class="line">   stop</span><br><span class="line"> ;;</span><br><span class="line"> </span><br><span class="line"> status)</span><br><span class="line">       status $prog</span><br><span class="line"> ;;</span><br><span class="line"> </span><br><span class="line"> restart)</span><br><span class="line">   stop</span><br><span class="line">   start</span><br><span class="line"> ;;</span><br><span class="line"> </span><br><span class="line"> *)</span><br><span class="line">   echo &quot;Usage: $0 &#123;start|stop|restart|status&#125;&quot;</span><br><span class="line"> ;;</span><br><span class="line"> </span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>然后加入启动项呗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /etc/init.d/supervisord</span><br><span class="line">chkconfig --add supervisord</span><br><span class="line">chkconfig supervisord on</span><br><span class="line">service supervisord start</span><br></pre></td></tr></table></figure>
+<p>这样可以通过/etc/init.d/supervisord start | stop |restart 来管理supervisord</p>
+<p>参考内容：<a href="http://supervisord.org/" target="_blank" rel="noopener">http://supervisord.org/</a></p>
+<h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>Flume为数据采集工具，但缺乏监控工具，Flume进程的状态不能实时看到，且进程停止不回自动重启，可以利用Supervisor来完成这些工作。</p>
+<h3 id="安装配置Supervisor"><a href="#安装配置Supervisor" class="headerlink" title="安装配置Supervisor"></a>安装配置Supervisor</h3><p>参考文章 <a href="http://infullstack.com/linux_supervisor.html" target="_blank" rel="noopener">http://infullstack.com/linux_supervisor.html</a></p>
+<h3 id="配置-etc-supervisord-conf"><a href="#配置-etc-supervisord-conf" class="headerlink" title="配置/etc/supervisord.conf"></a>配置/etc/supervisord.conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[program:flume] </span><br><span class="line">command=sh /usr/lib/flume/bin/flume-ng agent --conf /usr/lib/flume/conf/ -f /usr/lib/flume/conf/flume.conf -n agent1 -Dflume.root.logger=INFO,console</span><br><span class="line">autostart=true                           ;是否随supervisor启动</span><br><span class="line">autorestart=true                         ;是否在挂了之后重启，意外关闭后会重启，比如kill掉！</span><br><span class="line">startretries=3                           ;启动尝试次数</span><br><span class="line">stderr_logfile=/tmp/flume.err.log        ;标准输出的位置</span><br><span class="line">stdout_logfile=/tmp/flume.out.log        ;标准错误输出的位置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 也可以监控目录下配置文件，监控/etc/supervisord.d/目录下conf后缀文件，conf文件中配置监控上述内容</span><br><span class="line">[include]</span><br><span class="line">files=/etc/supervisord.d/*.conf</span><br></pre></td></tr></table></figure>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>程序不需要提前启动，supervisor启动的时候会启动Flume</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        
+        
+        <div class="vcomment"></div>
+        
+    </div>
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础环境"><span class="toc-number">2.</span> <span class="toc-text">基础环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#软件安装"><span class="toc-number">3.</span> <span class="toc-text">软件安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件配置"><span class="toc-number">4.</span> <span class="toc-text">文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动监控"><span class="toc-number">5.</span> <span class="toc-text">启动监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#supervisorctl管理程序进程"><span class="toc-number">6.</span> <span class="toc-text">supervisorctl管理程序进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加程序启动停止脚本"><span class="toc-number">7.</span> <span class="toc-text">增加程序启动停止脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概述-1"><span class="toc-number">8.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装配置Supervisor"><span class="toc-number">9.</span> <span class="toc-text">安装配置Supervisor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置-etc-supervisord-conf"><span class="toc-number">10.</span> <span class="toc-text">配置/etc/supervisord.conf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备注"><span class="toc-number">11.</span> <span class="toc-text">备注</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/linux-supervisor.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/linux-supervisor.html&text=Linux配置supervisor管理进程"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/linux-supervisor.html&is_video=false&description=Linux配置supervisor管理进程"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux配置supervisor管理进程&body=Check out this article: https://infullstack.github.io/linux-supervisor.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/linux-supervisor.html&title=Linux配置supervisor管理进程"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/linux-supervisor.html&name=Linux配置supervisor管理进程&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ray
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
+        appKey: "fWpVsIuv12f5WUQtCVLfb9px",
+        avatar:"mm",
+        placeholder: "念念不忘,必有回响.",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+
+</body>
+</html>
