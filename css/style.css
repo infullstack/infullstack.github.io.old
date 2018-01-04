@@ -1193,6 +1193,15 @@ article .content .caption {
 .blog-post-comments {
   margin-top: 4rem;
 }
+.v .vwrap {
+  border: 1px solid #444 !important;
+}
+.v .vwrap .vheader .vinput {
+  border-bottom: 1px solid #444 !important;
+}
+.v .vwrap .vcontrol .col {
+  color: #444 !important;
+}
 #footer {
   padding-top: 10px;
   padding-bottom: 10px;
