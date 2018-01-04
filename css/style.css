@@ -1202,6 +1202,9 @@ article .content .caption {
 .v .vwrap .vcontrol .col {
   color: #444 !important;
 }
+.v .vlist .vcard .vhead .vsys {
+  background: #ededed;
+}
 #footer {
   padding-top: 10px;
   padding-bottom: 10px;
