@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infullstack.github.io/"/>
-  <updated>2018-01-04T13:56:34.732Z</updated>
+  <updated>2018-01-04T14:33:17.079Z</updated>
   <id>https://infullstack.github.io/</id>
   
   <author>
@@ -17,45 +17,19 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2018</title>
-    <link href="https://infullstack.github.io/2018.html"/>
-    <id>https://infullstack.github.io/2018.html</id>
-    <published>2018-01-01T12:48:49.000Z</published>
-    <updated>2018-01-04T13:56:34.732Z</updated>
+    <title>Hello Hexo</title>
+    <link href="https://infullstack.github.io/hello-hexo.html"/>
+    <id>https://infullstack.github.io/hello-hexo.html</id>
+    <published>2017-12-27T02:21:00.000Z</published>
+    <updated>2018-01-04T14:33:17.079Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://images.unsplash.com/photo-1451481454041-104482d8e284?auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt=""></p><p>如果不出去走走，你以为这就是全部世界。</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="https://images.unsplash.com/photo-1451481454041-104482d8e284?auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt=""></p><p>已经很长时间没有管理博客了，在2018快要到来之前，决心整理下了，在github上部署了Hexo，选取了以前各个博客系统的主要文章，同步到了hexo，以前的文章用markdown格式在文章迁移上，优势就体现出来了。只不过评论就不同步了。</p><p>纯静态化、可以快速部署在github或coding、高效、易于扩展，最重要的是轻量简洁，同时还不需要管理服务器，不用再担心服务器故障，在有文章发布时，push到github即可。</p><p>Hexo真是一个非常美好的博客系统。</p><h2 id="我的Hexo配置"><a href="#我的Hexo配置" class="headerlink" title="我的Hexo配置"></a>我的Hexo配置</h2><p>theme: <a href="https://github.com/probberechts/cactus-dark" target="_blank" rel="noopener">cactus-dark</a><br>comment: <a href="https://valine.js.org/#/?id=valine" target="_blank" rel="noopener">valine</a></p><p>部署hexo和域名绑定过程参考：<a href="https://www.cnblogs.com/ldnh/archive/2017/10/11/7651840.html" target="_blank" rel="noopener">Mac上搭建基于Github的Hexo博客</a></p><h2 id="new-begin"><a href="#new-begin" class="headerlink" title="new begin"></a>new begin</h2><p>以前零碎搭了多个域名和博客，这次统一入口，算一个新的开始吧。</p><p>enjoy it.</p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1451481454041-104482d8e284?auto=format&amp;amp;fit=crop&amp;amp;w=2550&amp;amp;q=80&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;如果不出去
-      
-    
-    </summary>
-    
-    
-      <category term="2018" scheme="https://infullstack.github.io/tags/2018/"/>
-    
-      <category term="life" scheme="https://infullstack.github.io/tags/life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello Hexo</title>
-    <link href="https://infullstack.github.io/hello.html"/>
-    <id>https://infullstack.github.io/hello.html</id>
-    <published>2017-12-27T02:21:00.000Z</published>
-    <updated>2018-01-04T13:52:04.216Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://images.unsplash.com/photo-1507752533523-5186b0bc4c43?auto=format&amp;fit=crop&amp;w=1351&amp;q=80" alt=""></p><p>已经很长时间没有管理博客了，在2018快要到来之前，用了几个小时，在github上部署了Hexo，选取了以前各个博客系统的主要文章，同步到了hexo，算是一个新的开始。</p><p>用了hexo，发现hexo是一个很美好的博客系统。</p><h2 id="我的Hexo配置"><a href="#我的Hexo配置" class="headerlink" title="我的Hexo配置"></a>我的Hexo配置</h2><p>theme: <a href="https://github.com/probberechts/cactus-dark" target="_blank" rel="noopener">cactus-dark</a><br>comment: <a href="https://valine.js.org/#/?id=valine" target="_blank" rel="noopener">valine</a></p><p>部署hexo和域名绑定过程参考：<a href="https://www.cnblogs.com/ldnh/archive/2017/10/11/7651840.html" target="_blank" rel="noopener">Mac上搭建基于Github的Hexo博客</a></p><p>enjoy it.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1507752533523-5186b0bc4c43?auto=format&amp;amp;fit=crop&amp;amp;w=1351&amp;amp;q=80&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;已经很长时
       
     
@@ -570,6 +544,33 @@
       <category term="数据" scheme="https://infullstack.github.io/tags/%E6%95%B0%E6%8D%AE/"/>
     
       <category term="互联网" scheme="https://infullstack.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>说说我的利器</title>
+    <link href="https://infullstack.github.io/liqi.html"/>
+    <id>https://infullstack.github.io/liqi.html</id>
+    <published>2015-10-16T15:44:27.000Z</published>
+    <updated>2018-01-04T13:56:28.003Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="介绍一下你自己和所做的工作。"><a href="#介绍一下你自己和所做的工作。" class="headerlink" title="介绍一下你自己和所做的工作。"></a>介绍一下你自己和所做的工作。</h2><p>我是Misray，89年生，是一名全栈工程师，现在在一家大数据公司任职研发，懂点大数据（hadoop、mapreduce、spark、flume）、JAVA、前端（html5、css3、js、angular js、nodejs ），样样通样样松，哈哈。</p><p>当然平时写写技术和生活博客、倒腾新奇技术，以前的博客在<a href="http://iyanlei.com" target="_blank" rel="noopener">Ray</a>，也弄了个订阅工具<a href="http://feedly.xyz" target="_blank" rel="noopener">Feedly</a></p><h2 id="你都在使用哪些硬件？"><a href="#你都在使用哪些硬件？" class="headerlink" title="你都在使用哪些硬件？"></a>你都在使用哪些硬件？</h2><p>ThinkPad T440p，升级成了16内存 + 128 SSD  + win 10，对于经常出差的我，开发和使用足矣</p><h2 id="软件呢？"><a href="#软件呢？" class="headerlink" title="软件呢？"></a>软件呢？</h2><h3 id="PC软件"><a href="#PC软件" class="headerlink" title="PC软件"></a>PC软件</h3><p><a href="http://www.atom.io" target="_blank" rel="noopener">GitHub Atom</a> ,以前经常使用notepad和sublime text，但atom的出现，就换了。但atom的启动速度偏慢。</p><p><a href="http://www.eclipse.com" target="_blank" rel="noopener">eclipse</a>，JAVA开发的必备工具。当然也可以使用IntelliJ IDEA，使用eclipse只是习惯。</p><p>Clover，win下，浏览文件夹像使用chrome一样</p><p><a href="http://www.hongxingchajian.com" target="_blank" rel="noopener">红杏</a>  和 shadowsocks ，不解释</p><p><a href="http://www.phpstudy.net/" target="_blank" rel="noopener">PHPStudy</a> ，开发PHP的利器</p><p><a href="https://pomotodo.com/" target="_blank" rel="noopener">番茄土豆</a>，番茄工作法 + GTD  效率工具</p><p><a href="http://note.youdao.com/" target="_blank" rel="noopener">有道云笔记</a>，够用的笔记工具</p><p>Xshell 、WinSCP</p><h3 id="APP软件"><a href="#APP软件" class="headerlink" title="APP软件"></a>APP软件</h3><p>知乎日报、好奇心、startupnews、开源中国、简书、uber、有道云笔记、掘金</p><h2 id="你最理想的工作环境是什么？"><a href="#你最理想的工作环境是什么？" class="headerlink" title="你最理想的工作环境是什么？"></a>你最理想的工作环境是什么？</h2><p>大木桌、人体学工程椅子、网速佳、空气环境好。</p><h2 id="你平时获得工作灵感的方式有哪些？"><a href="#你平时获得工作灵感的方式有哪些？" class="headerlink" title="你平时获得工作灵感的方式有哪些？"></a>你平时获得工作灵感的方式有哪些？</h2><p>设计灵感网站</p><p> <a href="http://www.dirbbble.com" target="_blank" rel="noopener">Dribbble</a> 、  <a href="http://www.ui.cn" target="_blank" rel="noopener">UI</a>、 <a href="http://next.36kr.com/" target="_blank" rel="noopener">Next</a>、 <a href="http://www.v2ex.com" target="_blank" rel="noopener">V2ex</a></p><p>技术开发网站</p><p> oschina开源中国 、cnblogs、 并发编程开发、importnews等</p><p>逛这些社区和网站是主要的灵感来源，网上看到喜欢的设计，会保存下来，在疲惫或毫无灵感时候欣赏，找到灵感。</p><h2 id="推荐一件生活中的利器给大家。"><a href="#推荐一件生活中的利器给大家。" class="headerlink" title="推荐一件生活中的利器给大家。"></a>推荐一件生活中的利器给大家。</h2><p>博朗或飞利浦的电动牙刷，保证口腔的干净对程序员十分重要。</p><p><strong>本文参与了「利器社群计划」，发现更多创造者和他们的工具：<a href="http://liqi.io/community/" target="_blank" rel="noopener">利器</a></strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;介绍一下你自己和所做的工作。&quot;&gt;&lt;a href=&quot;#介绍一下你自己和所做的工作。&quot; class=&quot;headerlink&quot; title=&quot;介绍一下你自己和所做的工作。&quot;&gt;&lt;/a&gt;介绍一下你自己和所做的工作。&lt;/h2&gt;&lt;p&gt;我是Misray，89年生，是一名全栈工程师
+      
+    
+    </summary>
+    
+      <category term="科技爱好者" scheme="https://infullstack.github.io/categories/%E7%A7%91%E6%8A%80%E7%88%B1%E5%A5%BD%E8%80%85/"/>
+    
+    
+      <category term="利器" scheme="https://infullstack.github.io/tags/%E5%88%A9%E5%99%A8/"/>
+    
+      <category term="mac" scheme="https://infullstack.github.io/tags/mac/"/>
     
   </entry>
   
