@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="简介YCSB（Yahoo! Cloud Serving Benchmark）是雅虎开源的一款通用的性能测试工具。 通过这个工具我们可以对各类NoSQL产品进行相关的性能测试，包括：PNUTS、BigTableHBase、Hypertable、Azure、Cassandra、CouchDB、Voldemort、MongoDb、DynomiteYCSB与HBase自带的性能测试工具（Performan">
+<meta name="keywords" content="性能,hbase,ycsb,测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ycsb使用指南">
+<meta property="og:url" content="https://infullstack.github.io/ycsb使用指南.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="简介YCSB（Yahoo! Cloud Serving Benchmark）是雅虎开源的一款通用的性能测试工具。 通过这个工具我们可以对各类NoSQL产品进行相关的性能测试，包括：PNUTS、BigTableHBase、Hypertable、Azure、Cassandra、CouchDB、Voldemort、MongoDb、DynomiteYCSB与HBase自带的性能测试工具（Performan">
+<meta property="og:updated_time" content="2018-01-17T12:07:54.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ycsb使用指南">
+<meta name="twitter:description" content="简介YCSB（Yahoo! Cloud Serving Benchmark）是雅虎开源的一款通用的性能测试工具。 通过这个工具我们可以对各类NoSQL产品进行相关的性能测试，包括：PNUTS、BigTableHBase、Hypertable、Azure、Cassandra、CouchDB、Voldemort、MongoDb、DynomiteYCSB与HBase自带的性能测试工具（Performan">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="http://okzvb3705.bkt.clouddn.com/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="http://okzvb3705.bkt.clouddn.com/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="http://okzvb3705.bkt.clouddn.com/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>ycsb使用指南</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Ray" type="application/atom+xml" />
+    
+    <!-- styles
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+ -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/justifiedGallery/3.6.1/css/justifiedGallery.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+</head>
+
+<body class="animated slideInUp">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/atom">Feed</a></li>
+         
+          <li><a href="/about.html">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/kerberos定时登录设置.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/ycsb使用指南.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/ycsb使用指南.html&text=ycsb使用指南"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/ycsb使用指南.html&is_video=false&description=ycsb使用指南"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ycsb使用指南&body=Check out this article: https://infullstack.github.io/ycsb使用指南.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/ycsb使用指南.html&name=ycsb使用指南&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数配置"><span class="toc-number">3.</span> <span class="toc-text">参数配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ycsb使用指南
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ray</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-17T12:04:23.000Z" itemprop="datePublished">17 Jan 2018</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/hbase/">hbase</a>, <a class="tag-link" href="/tags/ycsb/">ycsb</a>, <a class="tag-link" href="/tags/性能/">性能</a>, <a class="tag-link" href="/tags/测试/">测试</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><pre><code>YCSB（Yahoo! Cloud Serving Benchmark）是雅虎开源的一款通用的性能测试工具。
+</code></pre><p>通过这个工具我们可以对各类NoSQL产品进行相关的性能测试，包括：PNUTS、BigTable<br>HBase、Hypertable、Azure、Cassandra、CouchDB、Voldemort、MongoDb、Dynomite<br>YCSB与HBase自带的性能测试工具（PerformanceEvaluation）相比，好处在于：<br>扩展：进行性能测试的客户端不仅仅只是HBase一款产品，而且可以是HBase不同的版本。<br>灵活：进行性能测试的时候，可以选择进行测试的方式：read+write，read+scan等，还可以选择不同操作的频度与选取Key的方式。<br>监控：进行性能测试的时候，可以实时显示测试进行的进度：</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载ycsb 0.6压缩包，解压即可<br><a href="https://github.com/brianfrankcooper/YCSB/releases/download/0.6.0/ycsb-0.6.0.tar.gz" target="_blank" rel="noopener">https://github.com/brianfrankcooper/YCSB/releases/download/0.6.0/ycsb-0.6.0.tar.gz</a></p>
+<p>注：执行ycsb时，如果报python argparse模块异常，因为python版本低，需要安装python argparse模块 ，解压进入执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></p>
+<p>创建Hbase表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n_splits = 200 </span><br><span class="line">create &apos;usertable&apos;, &apos;family&apos;, &#123;SPLITS =&gt; (1..n_splits).map &#123;|i| &quot;user#&#123;1000+i*(9999-1000)/n_splits&#125;&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h3><p>Ycsb的执行配置在workload文件下，可以参考workloada和workload_template配置文件</p>
+<ul>
+<li><p>Load配置<br>Workload文件夹下新建workload_load文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#记录数</span><br><span class="line">recordcount=10000000</span><br><span class="line">#操作记录数</span><br><span class="line">operationcount=10000000</span><br><span class="line"># 测试类</span><br><span class="line">workload=com.yahoo.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=true</span><br><span class="line"># read比例</span><br><span class="line">readproportion=0</span><br><span class="line"># update比例</span><br><span class="line">updateproportion=0</span><br><span class="line"># scan比例</span><br><span class="line">scanproportion=0</span><br><span class="line"># Load比例</span><br><span class="line">insertproportion=1</span><br><span class="line">requestdistribution=zipfian</span><br><span class="line"># The number of fields in a record</span><br><span class="line">fieldcount=10</span><br><span class="line"># The size of each field (in bytes)</span><br><span class="line">fieldlength=100</span><br><span class="line"># hbase表</span><br><span class="line">table=usertable</span><br><span class="line">columnfamily=family</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Scan配置<br>Workload文件夹下新建workload_scan文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">recordcount=10000000</span><br><span class="line">operationcount=10000000</span><br><span class="line">workload=com.yahoo.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=true</span><br><span class="line">readproportion=0</span><br><span class="line">updateproportion=0</span><br><span class="line">scanproportion=1</span><br><span class="line">insertproportion=0</span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">table=usertable</span><br><span class="line">columnfamily=family</span><br><span class="line">#必填</span><br><span class="line">hbase.usepagefilter=false</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Read配置</p>
+</li>
+</ul>
+<p>Workload文件夹下新建workload_read文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">recordcount=10000000</span><br><span class="line">operationcount=10000000</span><br><span class="line">workload=com.yahoo.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=true</span><br><span class="line">readproportion=1</span><br><span class="line">updateproportion=0</span><br><span class="line">scanproportion=0</span><br><span class="line">insertproportion=0</span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">table=usertable</span><br><span class="line">columnfamily=family</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li><p>Load</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/ycsb load hbase098 -P workloads/workload_load -cp hbase098-binding/conf –threads 100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Scan</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/ycsb load hbase098 -P workloads/workload_scan -cp hbase098-binding/conf –threads 100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Read</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/ycsb load hbase098 -P workloads/workload_read -cp hbase098-binding/conf –threads 100</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>测试的时候可以在集群的节点上启多个客户端执行ycsb测试，如：Load测试，集群5个节点，各启动10个客户端，每个客户端启动100个线程，总共是5000个线程执行Load</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        
+        
+        <div class="vcomment"></div>
+        
+    </div>
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/atom">Feed</a></li>
+         
+          <li><a href="/about.html">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数配置"><span class="toc-number">3.</span> <span class="toc-text">参数配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/ycsb使用指南.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/ycsb使用指南.html&text=ycsb使用指南"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/ycsb使用指南.html&is_video=false&description=ycsb使用指南"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ycsb使用指南&body=Check out this article: https://infullstack.github.io/ycsb使用指南.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/ycsb使用指南.html&title=ycsb使用指南"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/ycsb使用指南.html&name=ycsb使用指南&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2013-2018 Ray
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/atom">Feed</a></li>
+         
+          <li><a href="/about.html">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    <!-- jquery 
+<script src="/lib/jquery/jquery.min.js"></script> 
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+-->
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/justifiedGallery/3.6.1/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
+        appKey: "fWpVsIuv12f5WUQtCVLfb9px",
+        avatar:"mm",
+        placeholder: "念念不忘,必有回响.",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+
+</body>
+</html>

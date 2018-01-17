@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://infullstack.github.io/"/>
-  <updated>2018-01-16T14:07:25.215Z</updated>
+  <updated>2018-01-17T12:07:54.574Z</updated>
   <id>https://infullstack.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ycsb使用指南</title>
+    <link href="https://infullstack.github.io/ycsb%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.html"/>
+    <id>https://infullstack.github.io/ycsb使用指南.html</id>
+    <published>2018-01-17T12:04:23.000Z</published>
+    <updated>2018-01-17T12:07:54.574Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><pre><code>YCSB（Yahoo! Cloud Serving Benchmark）是雅虎开源的一款通用的性能测试工具。</code></pre><p>通过这个工具我们可以对各类NoSQL产品进行相关的性能测试，包括：PNUTS、BigTable<br>HBase、Hypertable、Azure、Cassandra、CouchDB、Voldemort、MongoDb、Dynomite<br>YCSB与HBase自带的性能测试工具（PerformanceEvaluation）相比，好处在于：<br>扩展：进行性能测试的客户端不仅仅只是HBase一款产品，而且可以是HBase不同的版本。<br>灵活：进行性能测试的时候，可以选择进行测试的方式：read+write，read+scan等，还可以选择不同操作的频度与选取Key的方式。<br>监控：进行性能测试的时候，可以实时显示测试进行的进度：</p><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载ycsb 0.6压缩包，解压即可<br><a href="https://github.com/brianfrankcooper/YCSB/releases/download/0.6.0/ycsb-0.6.0.tar.gz" target="_blank" rel="noopener">https://github.com/brianfrankcooper/YCSB/releases/download/0.6.0/ycsb-0.6.0.tar.gz</a></p><p>注：执行ycsb时，如果报python argparse模块异常，因为python版本低，需要安装python argparse模块 ，解压进入执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></p><p>创建Hbase表</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n_splits = 200 </span><br><span class="line">create &apos;usertable&apos;, &apos;family&apos;, &#123;SPLITS =&gt; (1..n_splits).map &#123;|i| &quot;user#&#123;1000+i*(9999-1000)/n_splits&#125;&quot;&#125;&#125;</span><br></pre></td></tr></table></figure><h3 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h3><p>Ycsb的执行配置在workload文件下，可以参考workloada和workload_template配置文件</p><ul><li><p>Load配置<br>Workload文件夹下新建workload_load文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#记录数</span><br><span class="line">recordcount=10000000</span><br><span class="line">#操作记录数</span><br><span class="line">operationcount=10000000</span><br><span class="line"># 测试类</span><br><span class="line">workload=com.yahoo.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=true</span><br><span class="line"># read比例</span><br><span class="line">readproportion=0</span><br><span class="line"># update比例</span><br><span class="line">updateproportion=0</span><br><span class="line"># scan比例</span><br><span class="line">scanproportion=0</span><br><span class="line"># Load比例</span><br><span class="line">insertproportion=1</span><br><span class="line">requestdistribution=zipfian</span><br><span class="line"># The number of fields in a record</span><br><span class="line">fieldcount=10</span><br><span class="line"># The size of each field (in bytes)</span><br><span class="line">fieldlength=100</span><br><span class="line"># hbase表</span><br><span class="line">table=usertable</span><br><span class="line">columnfamily=family</span><br></pre></td></tr></table></figure></li><li><p>Scan配置<br>Workload文件夹下新建workload_scan文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">recordcount=10000000</span><br><span class="line">operationcount=10000000</span><br><span class="line">workload=com.yahoo.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=true</span><br><span class="line">readproportion=0</span><br><span class="line">updateproportion=0</span><br><span class="line">scanproportion=1</span><br><span class="line">insertproportion=0</span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">table=usertable</span><br><span class="line">columnfamily=family</span><br><span class="line">#必填</span><br><span class="line">hbase.usepagefilter=false</span><br></pre></td></tr></table></figure></li><li><p>Read配置</p></li></ul><p>Workload文件夹下新建workload_read文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">recordcount=10000000</span><br><span class="line">operationcount=10000000</span><br><span class="line">workload=com.yahoo.ycsb.workloads.CoreWorkload</span><br><span class="line">readallfields=true</span><br><span class="line">readproportion=1</span><br><span class="line">updateproportion=0</span><br><span class="line">scanproportion=0</span><br><span class="line">insertproportion=0</span><br><span class="line">requestdistribution=zipfian</span><br><span class="line">table=usertable</span><br><span class="line">columnfamily=family</span><br></pre></td></tr></table></figure><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul><li><p>Load</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/ycsb load hbase098 -P workloads/workload_load -cp hbase098-binding/conf –threads 100</span><br></pre></td></tr></table></figure></li><li><p>Scan</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/ycsb load hbase098 -P workloads/workload_scan -cp hbase098-binding/conf –threads 100</span><br></pre></td></tr></table></figure></li><li><p>Read</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/ycsb load hbase098 -P workloads/workload_read -cp hbase098-binding/conf –threads 100</span><br></pre></td></tr></table></figure></li></ul><p>测试的时候可以在集群的节点上启多个客户端执行ycsb测试，如：Load测试，集群5个节点，各启动10个客户端，每个客户端启动100个线程，总共是5000个线程执行Load</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;YCSB（Yahoo! Cloud Serving Benchmark）是雅虎开源的一款通用的性能测试工具。
+&lt;/code&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="性能" scheme="https://infullstack.github.io/tags/%E6%80%A7%E8%83%BD/"/>
+    
+      <category term="hbase" scheme="https://infullstack.github.io/tags/hbase/"/>
+    
+      <category term="ycsb" scheme="https://infullstack.github.io/tags/ycsb/"/>
+    
+      <category term="测试" scheme="https://infullstack.github.io/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>kerberos定时登录设置</title>
@@ -540,37 +570,6 @@
     
       <category term="运动爱好者" scheme="https://infullstack.github.io/categories/%E8%BF%90%E5%8A%A8%E7%88%B1%E5%A5%BD%E8%80%85/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>聊聊这几年的数据泄漏</title>
-    <link href="https://infullstack.github.io/dataleakage.html"/>
-    <id>https://infullstack.github.io/dataleakage.html</id>
-    <published>2015-10-20T12:27:10.000Z</published>
-    <updated>2018-01-04T13:56:21.589Z</updated>
-    
-    <content type="html"><![CDATA[<p>近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。</p><p>下面就谈谈自己遇到的几次泄密事件。</p><h2 id="CSDN数据泄漏"><a href="#CSDN数据泄漏" class="headerlink" title="CSDN数据泄漏"></a>CSDN数据泄漏</h2><p>2011年，CSDN遭遇到了一次重大的账户泄漏，黑客公开CSDN网站数据库 600余万用户资料泄密，所有账户密码都是明文存储。同时也开启了近几年国内互联网的泄漏风暴。</p><p>2010年就步入IT职场的我，毫无疑问，当时最火的IT社区就是<a href="http://iteye.com" target="_blank" rel="noopener">javaeye</a>和<a href="http://www.csdn.net" target="_blank" rel="noopener">CSDN</a>，所以我的账户也在泄漏数据之列。那个时候我的所有密码基本一致，虽然那个时候对我并没有造成过多的影响，但那时我就意识到帐号数据都处在很危险的地方。</p><p>相关阅读：</p><ul><li><a href="http://www.chinaz.com/news/2011/1221/227512.shtml" target="_blank" rel="noopener">黑客公开CSDN网站数据库 600余万用户资料泄密</a></li><li><a href="http://www.wooyun.org/bugs/wooyun-2011-03692" target="_blank" rel="noopener">CSDN数据库泄露，大量用户真实账号密码外泄</a></li></ul><h2 id="汉庭如家2000万账户泄漏"><a href="#汉庭如家2000万账户泄漏" class="headerlink" title="汉庭如家2000万账户泄漏"></a>汉庭如家2000万账户泄漏</h2><p>2013年10月，汉庭如家2000万账户泄密，庆幸的是，那个时候汉庭如家基本没住过，所以我的数据不在其中。</p><p>有趣的是，由于我从事大数据工作，在一次与某电科院交流时，客户提议，导入2000万文本数据到hive中，进行检索，测试我们的产品性能，片刻时间导入之后，输入某领导手机后，刷刷刷，多条开房记录在秒内查询出来了，把我们都笑晕了。</p><p>相关阅读：</p><ul><li><a href="http://www.wooyun.org/bugs/wooyun-2010-034935" target="_blank" rel="noopener">如家等大量酒店客户开房记录被第三方存储并因漏洞导致泄露</a></li></ul><h2 id="QQ数据泄漏"><a href="#QQ数据泄漏" class="headerlink" title="QQ数据泄漏"></a>QQ数据泄漏</h2><p>2013年，7000万个腾讯QQ群数据遭泄露，泄漏文件为SQL Server的数据库导出格式，“解压后达90多G，大概有7000多万个QQ群，12亿多个部分重复的QQ号码。</p><p>当然我的qq信息，也在其中，至今，在社工库都能查到我的相关信息。-_-!!</p><h2 id="12306账户数据泄密"><a href="#12306账户数据泄密" class="headerlink" title="12306账户数据泄密"></a>12306账户数据泄密</h2><p>在14年12月底，正是预定春运回家火车的时间，10几万条12306明文账户信息从网上公开，我立即下载下来，还好没有的帐号，随机选了几条数据登录12306，都能登录，当然我没有把别的票退掉。但这个的后果可想而知。</p><p><a href="http://www.wooyun.org/bugs/wooyun-2014-088532" target="_blank" rel="noopener">乌云网漏洞</a></p><h2 id="网易邮箱"><a href="#网易邮箱" class="headerlink" title="网易邮箱"></a>网易邮箱</h2><p>其实，昨日就有大量网易邮箱遭全面暴力破解的相关新闻放出，大量网友称绑定的账号遭泄露。绑定网易邮箱的Apple ID被锁成砖，iPhone存储数据被清空。其中，包括苹果Apple ID在内的微博、支付宝、百度云盘等都受到影响。</p><p>还好，我的iphone先于帐号丢了。  -_- !!</p><p>相关阅读<br><a href="http://business.sohu.com/20151020/n423654851.shtml" target="_blank" rel="noopener">网易邮箱现巨大漏洞 过亿数据遭泄漏</a></p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>当然，这些只是近几年较为重大的事件，其他泄漏事件也不少。<a href="http://www.wooyun.org/" target="_blank" rel="noopener">http://www.wooyun.org/</a>上经常会有帐号安全漏洞。</p><h2 id="怎么规避账户泄漏"><a href="#怎么规避账户泄漏" class="headerlink" title="怎么规避账户泄漏"></a>怎么规避账户泄漏</h2><p>用户无法避免账户泄漏，但需要确保不会引起连锁反应，所以我们最好控制每个账户的密码都不同，可以把密码设置为一段有含义的字母，好记又复杂。</p><p>推荐阅读：</p><ul><li><a href="http://news.cnblogs.com/n/213772/" target="_blank" rel="noopener">一个密码改变了我的人生</a></li></ul><h3 id="我的银行密码设置方法"><a href="#我的银行密码设置方法" class="headerlink" title="我的银行密码设置方法"></a>我的银行密码设置方法</h3><p>卡号选几位  再利用各种运算符（加减乘除左移右移等）得出一个公式，算出一个密码。这样，只要有卡号，我就有密码了。(<em>^__^</em>) 嘻嘻</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;近几年，互联网数据泄漏事件频出， 事件发生的第一时间，往往我会下载泄漏数据，查看下自己是否在泄漏数据中。&lt;/p&gt;
-&lt;p&gt;下面就谈谈自己遇到的几次泄密事件。&lt;/p&gt;
-&lt;h2 id=&quot;CSDN数据泄漏&quot;&gt;&lt;a href=&quot;#CSDN数据泄漏&quot; class=&quot;headerlink
-      
-    
-    </summary>
-    
-      <category term="观点感悟" scheme="https://infullstack.github.io/categories/%E8%A7%82%E7%82%B9%E6%84%9F%E6%82%9F/"/>
-    
-    
-      <category term="安全" scheme="https://infullstack.github.io/tags/%E5%AE%89%E5%85%A8/"/>
-    
-      <category term="数据" scheme="https://infullstack.github.io/tags/%E6%95%B0%E6%8D%AE/"/>
-    
-      <category term="互联网" scheme="https://infullstack.github.io/tags/%E4%BA%92%E8%81%94%E7%BD%91/"/>
     
   </entry>
   
