@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Linux kill多个进程1ps -ef|grep ycsb|grep -v grep|cut -c 9-15|xargs kill -9 列举根目录文件下文件大小1du / -m --max-depth 1 |sort -nr ####　查看端口占用 12netstat　-anp|grep port即：netstat –apn | grep 8080 查找文件内容1grep -r magic">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用的linux命令">
+<meta property="og:url" content="https://infullstack.github.io/linux-command.html">
+<meta property="og:site_name" content="Ray">
+<meta property="og:description" content="Linux kill多个进程1ps -ef|grep ycsb|grep -v grep|cut -c 9-15|xargs kill -9 列举根目录文件下文件大小1du / -m --max-depth 1 |sort -nr ####　查看端口占用 12netstat　-anp|grep port即：netstat –apn | grep 8080 查找文件内容1grep -r magic">
+<meta property="og:updated_time" content="2018-01-04T13:54:45.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用的linux命令">
+<meta name="twitter:description" content="Linux kill多个进程1ps -ef|grep ycsb|grep -v grep|cut -c 9-15|xargs kill -9 列举根目录文件下文件大小1du / -m --max-depth 1 |sort -nr ####　查看端口占用 12netstat　-anp|grep port即：netstat –apn | grep 8080 查找文件内容1grep -r magic">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="http://okzvb3705.bkt.clouddn.com/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="http://okzvb3705.bkt.clouddn.com/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="http://okzvb3705.bkt.clouddn.com/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>常用的linux命令</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/atom.xml" title="Ray" type="application/atom+xml" />
+    
+</head>
+
+<body class="max-width mx-auto px3">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/atom">Feed</a></li>
+         
+          <li><a href="/about.html">About</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/booklist.html"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/a-english-song.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/linux-command.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/linux-command.html&text=常用的linux命令"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/linux-command.html&is_video=false&description=常用的linux命令"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=常用的linux命令&body=Check out this article: https://infullstack.github.io/linux-command.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/linux-command.html&name=常用的linux命令&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-kill多个进程"><span class="toc-number">1.</span> <span class="toc-text">Linux kill多个进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列举根目录文件下文件大小"><span class="toc-number">2.</span> <span class="toc-text">列举根目录文件下文件大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找文件内容"><span class="toc-number">3.</span> <span class="toc-text">查找文件内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用混合查找方式查找文件"><span class="toc-number">4.</span> <span class="toc-text">使用混合查找方式查找文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux光盘挂载"><span class="toc-number">5.</span> <span class="toc-text">Linux光盘挂载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#根据-CPU-使用来升序排序"><span class="toc-number">6.</span> <span class="toc-text">根据 CPU 使用来升序排序</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        常用的linux命令
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ray</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-01-03T04:48:20.000Z" itemprop="datePublished">03 Jan 2016</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h4 id="Linux-kill多个进程"><a href="#Linux-kill多个进程" class="headerlink" title="Linux kill多个进程"></a>Linux kill多个进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep ycsb|grep -v grep|cut -c 9-15|xargs kill -9</span><br></pre></td></tr></table></figure>
+<h4 id="列举根目录文件下文件大小"><a href="#列举根目录文件下文件大小" class="headerlink" title="列举根目录文件下文件大小"></a>列举根目录文件下文件大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du / -m --max-depth 1 |sort -nr</span><br></pre></td></tr></table></figure>
+<p>####　查看端口占用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat　-anp|grep port</span><br><span class="line">即：netstat –apn | grep 8080</span><br></pre></td></tr></table></figure>
+<h4 id="查找文件内容"><a href="#查找文件内容" class="headerlink" title="查找文件内容"></a>查找文件内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r magic /usr/src　　#显示/usr/src目录下的文件(包含子目录)包含magic的行</span><br></pre></td></tr></table></figure>
+<h4 id="使用混合查找方式查找文件"><a href="#使用混合查找方式查找文件" class="headerlink" title="使用混合查找方式查找文件"></a>使用混合查找方式查找文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /tmp -size +10000c -and -mtime +2 　　#在/tmp目录下查找大于10000字节并在最后2分钟内修改的文件</span><br></pre></td></tr></table></figure>
+<h4 id="Linux光盘挂载"><a href="#Linux光盘挂载" class="headerlink" title="Linux光盘挂载"></a>Linux光盘挂载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t iso9660 -o loop CentOs.iso /mnt/cdrom</span><br></pre></td></tr></table></figure>
+<h4 id="根据-CPU-使用来升序排序"><a href="#根据-CPU-使用来升序排序" class="headerlink" title="根据 CPU 使用来升序排序"></a>根据 CPU 使用来升序排序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux --sort -pcpu | less</span><br></pre></td></tr></table></figure>
+<p>for host in VM-233-25-centos VM-226-228-centos VM-252-84-centos VM-232-137-centos VM-251-49-centos VM-249-233-centos VM-101-129-centos VM-101-234-centos; do ssh $host yum clean all; done</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/atom">Feed</a></li>
+         
+          <li><a href="/about.html">About</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux-kill多个进程"><span class="toc-number">1.</span> <span class="toc-text">Linux kill多个进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列举根目录文件下文件大小"><span class="toc-number">2.</span> <span class="toc-text">列举根目录文件下文件大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找文件内容"><span class="toc-number">3.</span> <span class="toc-text">查找文件内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用混合查找方式查找文件"><span class="toc-number">4.</span> <span class="toc-text">使用混合查找方式查找文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux光盘挂载"><span class="toc-number">5.</span> <span class="toc-text">Linux光盘挂载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#根据-CPU-使用来升序排序"><span class="toc-number">6.</span> <span class="toc-text">根据 CPU 使用来升序排序</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://infullstack.github.io/linux-command.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://infullstack.github.io/linux-command.html&text=常用的linux命令"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://infullstack.github.io/linux-command.html&is_video=false&description=常用的linux命令"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=常用的linux命令&body=Check out this article: https://infullstack.github.io/linux-command.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://infullstack.github.io/linux-command.html&title=常用的linux命令"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://infullstack.github.io/linux-command.html&name=常用的linux命令&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ray
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/atom">Feed</a></li>
+         
+          <li><a href="/about.html">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery 
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+-->
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/justifiedGallery/3.6.1/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "DKCuNbVKHTICu9FUqIeeRFPP-gzGzoHsz",
+        appKey: "fWpVsIuv12f5WUQtCVLfb9px",
+        avatar:"mm",
+        placeholder: "念念不忘,必有回响.",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+
