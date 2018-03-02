@@ -453,6 +453,8 @@ body {
   flex-direction: column;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  background: -webkit-linear-gradient(to right, #434343, #000);
+  background: linear-gradient(to right, #434343, #000);
 }
 body img,
 body video {
