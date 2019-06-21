@@ -32,6 +32,47 @@
       </ul>
     </nav>
   </div>
+  <div class="">
+    <header class="siderbar" style="z-index:100;
+    background:#444 url(https://ryanc.cc/upload/2018/10/35902018062315333072720181116125248892.jpg) no-repeat center;background-size: cover;
+    header:100%;
+    ">
+    <!-- div class="logo">
+      <img src="https://source.unsplash.com/random?2"/>
+    </div -->
+    <div class="site-desc">
+      <div class="blog-title">
+        <a href="/" class="">Ray</a>
+      </div>
+      <div class="site-description">
+        I am a full stack engineer, working on big data.
+      </div>
+      <div class="site-social">
+          <a class="icon" target="_blank" href="http://github.com/infullstack">
+            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+          </a>
+          <a class="icon" target="_blank" href="mailto:yanleijava@163.com">
+            <i class="fa fa-envelope-o"></i>
+          </a>
+          <a class="icon" target="_blank" href="http://github.com/infullstack">
+            <i class="fa fa-github"></i>
+          </a>
+          <a class="icon" target="_blank" href="https://twitter.com/siinnger">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a class="icon" target="_blank" href="http://weibo.com/infullstack">
+            <i class="fa fa-weibo"></i>
+          </a>
+          <a class="icon" target="_blank" href="https://www.instagram.com/therayrayray/">
+            <i class="fa fa-instagram"></i>
+          </a>
+      </div>
+    </div>
+
+
+    
+</header>
+  </div>
 </header>
 
     <main class="container">
@@ -675,5 +716,42 @@
 	<div class="">Designed by Lei Yan, Proudly published with Hexo !</div>
 </div>
     </main>
+    <div class="back-top" style="display: none;" title="回到顶部">
+        <!--此处回到顶部图标自己改-->
+        <i class="fa fa-angle-double-up"></i>
+    </div>
   </body>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/instantclick/3.1.0/instantclick.min.js"></script>
+  <script data-no-instant>InstantClick.init();</script>
+  <script>
+  	//回到顶部
+    $(function () {
+        if($(window).width() >= 700) {//本人的项目是响应式的,但是移动端不显示回到顶部,自己可以去掉
+            $(window).scroll(function () {
+                if ($(window).scrollTop() <= 200) {
+                    if ($(".back-top").css("display") != "none") {
+                        $(".back-top").slideUp("normal"); //缓慢下降隐藏
+                    }
+                }
+                else {
+                    if ($(".back-top").css("display") == "none") {
+                        $(".back-top").slideDown("normal"); //缓慢上升显示
+                    }
+                }
+            });
+        }
+
+        $(".cate ul li a").hover(function(){
+        	$(".cate ul li a.active").addClass("noactive");
+        },function(){
+		    $(".cate ul li a.active").removeClass("noactive");
+		});
+
+
+    });
+    $(".back-top").click(function () {
+        $("body,html").animate({scrollTop:0}, "slow");
+    });
+  </script>
 </html>
