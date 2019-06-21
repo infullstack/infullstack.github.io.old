@@ -128,13 +128,14 @@
         <div class="ctnWrap">
 
           <div class="post-title">
-            <a class="post-title-link" href="/groupby.html">MySQL和Hive的GroupBy排序</a>
+            <a class="post-title-link" href="/hive-page.html">hive实现分页</a>
           </div>
           <div class="post-content">
               
-                ## 需求 ##分组group by的时候，需要在group by 每组的结果进行排序如这样的需求：需要找出所有文章中，每个作者按时间排序的文章(最新文章)，想到的语句有：1select * from contents group by author order by pulishtime desc;
-这个语句的执行结果如何？
-请先来看下where,group by,having,order...
+                hive没有像MySQL那样的limit start,end那样的写法实现分页，所以需要使用别的方式来实现分页。以下是我想到的两种方式：
+一、借助唯一标识字段如果分页的表有唯一标识的字段，可以通过这个字段来实现分页：
+
+获取第一页数据：注：同时需要记录这10条中最大的id为preId，作为下一页的条件。select  * from table order by id asc limit 10...
               
           </div>
 <div class="article-list-type1"><em class="">
@@ -163,14 +164,13 @@
         <div class="ctnWrap">
 
           <div class="post-title">
-            <a class="post-title-link" href="/hive-page.html">hive实现分页</a>
+            <a class="post-title-link" href="/groupby.html">MySQL和Hive的GroupBy排序</a>
           </div>
           <div class="post-content">
               
-                hive没有像MySQL那样的limit start,end那样的写法实现分页，所以需要使用别的方式来实现分页。以下是我想到的两种方式：
-一、借助唯一标识字段如果分页的表有唯一标识的字段，可以通过这个字段来实现分页：
-
-获取第一页数据：注：同时需要记录这10条中最大的id为preId，作为下一页的条件。select  * from table order by id asc limit 10...
+                ## 需求 ##分组group by的时候，需要在group by 每组的结果进行排序如这样的需求：需要找出所有文章中，每个作者按时间排序的文章(最新文章)，想到的语句有：1select * from contents group by author order by pulishtime desc;
+这个语句的执行结果如何？
+请先来看下where,group by,having,order...
               
           </div>
 <div class="article-list-type1"><em class="">
