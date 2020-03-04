@@ -2,10 +2,11 @@
 <li>要减少网络延迟，配置所有节点在同一子网</li>
 <li>不使用虚拟机</li>
 <li>noatime挂载磁盘，文件访问数据不会被记录</li>
-<li>节点磁盘不要做RAID和LVM</li>
-</ol>
-<h2 id="map和reduce-task设置"><a href="#map和reduce-task设置" class="headerlink" title="map和reduce task设置"></a>map和reduce task设置</h2><ol>
-<li>设置map执行结束之后再执行reduce任务，mapreduce.job.reduce.slowstart.completedmaps设置成1</li>
+<li><p>节点磁盘不要做RAID和LVM</p>
+<a id="more"></a>
+<h2 id="map和reduce-task设置"><a href="#map和reduce-task设置" class="headerlink" title="map和reduce task设置"></a>map和reduce task设置</h2></li>
+<li><p>设置map执行结束之后再执行reduce任务，mapreduce.job.reduce.slowstart.completedmaps设置成1</p>
+</li>
 <li>如果每个task的执行时间少于30到40秒，就减少task的数量。Task的创建与调度一般耗费几秒的时间，如果task完成的很快，我们就是在浪费时间。同时，设置JVM重用也可以解决这个问题。</li>
 <li>如果一个job的输入数据大于1TB，我们就增加block size到256或者512，这样可以减少task的数量。你可以使用这个命令去修改已存在文件的block size: hadoop distcp -Ddfs.block.size=$[256<em>1024</em>1024] /path/to/inputdata  /path/to/inputdata-with/largeblocks。在执行完这个命令后，你就可以删除原始的输入文件了(/path/to/inputdata)。</li>
 <li>不要调度太多的reduce task — 对于大多数job来说，我们推荐reduce task的数量应当略小于cluster中reduce slot的倍数</li>
@@ -20,6 +21,4 @@
 <li>如果是测试环境，可以取消hadoop hdfs的用户权限检查。打开conf/hdfs-site.xml，找到dfs.permissions属性修改为false（默认为true）OK了。</li>
 <li>timeout 设置大点，避免长时间的任务超时而停止执行</li>
 </ol>
-</div><div class="tags"><a class="tag-link" href="/tags/mapreduce/">mapreduce</a><a class="tag-link" href="/tags/优化/">优化</a><a class="tag-link" href="/tags/性能/">性能</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/Linux下搭建SVN-Apache.html">Linux下搭建SVN+Apache</a></li><li>下一篇：<a href="/linux-disk.html">Linux磁盘批量分区和挂载</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-curry" target="_blank">Curry</a><span>.</span></div></footer><script src="/script/jquery.min.js"></script><link rel="stylesheet" href="/fancybox/jquery.fancybox.css"><script src="/fancybox/jquery.fancybox.pack.js"></script><script src="/script/index.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-61220413-1', 'auto');
-ga('send', 'pageview');</script><script src="/script/post.js"></script></body></html>
+</div><div class="tags"><a class="tag-link" href="/tags/mapreduce/">mapreduce</a><a class="tag-link" href="/tags/优化/">优化</a><a class="tag-link" href="/tags/性能/">性能</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/Linux下搭建SVN-Apache.html">Linux下搭建SVN+Apache</a></li><li>下一篇：<a href="/linux-disk.html">Linux磁盘批量分区和挂载</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-curry" target="_blank">Curry</a><span>.</span></div></footer><script src="/script/jquery.min.js"></script><link rel="stylesheet" href="/fancybox/jquery.fancybox.css"><script src="/fancybox/jquery.fancybox.pack.js"></script><script src="/script/index.js"></script><script src="/script/post.js"></script></body></html>
