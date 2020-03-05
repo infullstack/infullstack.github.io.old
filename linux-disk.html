@@ -1,4 +1,21 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content="I am a full stack engineer, working on big data."><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Linux磁盘批量分区和挂载</title><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar-min.png"></div><div class="author"><div class="author-name"><a href="/">Ray</a></div><div class="about-me">Halo~ ，Just a Product Manager Blog</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">归档</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar-min.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/infullstack"></span><a href="https://github.com/infullstack" target="_blank" title="https://github.com/infullstack">https://github.com/infullstack</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="infullstack@163.com"></span><span>infullstack@163.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="onlyyanlei"></span><span>onlyyanlei</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">Linux磁盘批量分区和挂载</div><div class="date">写于2014年12月01日</div><div class="content"><h4>Format</h4><br><a id="more"></a><br><pre><code>#!/bin/sh<br><br>#DEVICE_LIST=””<br>DEVICE_LIST=”/dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg /dev/sdh”<br>for DEVICE in $DEVICE_LIST<br>do<br>  echo “+++++create partition for $DEVICE……”<br>  parted -s $DEVICE mklabel gpt mkpart gpt2t ext2 0% 100%<br>  PARTITION=”$DEVICE””1”<br>  echo “+++++formatting $PARTITION……”<br>  mkfs.ext4 -T largefile $PARTITION<br>done<br></code></pre><br><br><h4>Mount</h4>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content="I am a full stack engineer, working on big data."><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Linux磁盘批量分区和挂载</title><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar-min.png"></div><div class="author"><div class="author-name"><a href="/">Ray</a></div><div class="about-me">Halo~ ，Just a Product Manager Blog</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">归档</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar-min.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/infullstack"></span><a href="https://github.com/infullstack" target="_blank" title="https://github.com/infullstack">https://github.com/infullstack</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="infullstack@163.com"></span><span>infullstack@163.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="onlyyanlei"></span><span>onlyyanlei</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">Linux磁盘批量分区和挂载</div><div class="date">写于2014年12月01日</div><div class="content"><a id="more"></a>
+<h4>Format</h4>
+
+<pre><code>#!/bin/sh
+
+#DEVICE_LIST=""
+DEVICE_LIST="/dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg /dev/sdh"
+for DEVICE in $DEVICE_LIST
+do
+  echo "+++++create partition for $DEVICE......"
+  parted -s $DEVICE mklabel gpt mkpart gpt2t ext2 0% 100%
+  PARTITION="$DEVICE""1"
+  echo "+++++formatting $PARTITION......"
+  mkfs.ext4 -T largefile $PARTITION
+done
+</code></pre>
+
+<h4>Mount</h4>
 
 <pre><code>#!/bin/sh
 
